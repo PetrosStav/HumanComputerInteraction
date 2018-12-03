@@ -1,18 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeScreen">
 
+    <ImageView
+        android:id="@+id/ivCircleDryer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="1163dp"
+        android:layout_marginTop="481dp"
+        android:layout_marginEnd="114dp"
+        android:layout_marginBottom="345dp"
+        app:srcCompat="@drawable/circle" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/btStart"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="926dp"
+        android:layout_marginTop="-62dp"
+        android:layout_marginEnd="70dp"
+        android:max="100"
+        android:progress="50" />
+
     <TextView
+        android:id="@+id/tvHomeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="463dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="510dp"
+        android:layout_marginBottom="830dp"
+        android:text="@string/app_title"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/btSelectProgram"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="489dp"
+        android:layout_marginTop="282dp"
+        android:layout_marginEnd="531dp"
+        android:layout_marginBottom="595dp"
+        android:text="Select Program" />
+
+    <Button
+        android:id="@+id/btAdvancedProgram"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="487dp"
+        android:layout_marginTop="373dp"
+        android:layout_marginEnd="533dp"
+        android:layout_marginBottom="504dp"
+        android:text="advanced program" />
+
+    <Button
+        android:id="@+id/btManagePrograms"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="493dp"
+        android:layout_marginTop="473dp"
+        android:layout_marginEnd="527dp"
+        android:layout_marginBottom="404dp"
+        android:text="manage programs" />
+
+    <Button
+        android:id="@+id/btHelp"
+        android:layout_width="345dp"
+        android:layout_height="58dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="495dp"
+        android:layout_marginTop="583dp"
+        android:layout_marginBottom="294dp"
+        android:text="help" />
+
+    <Button
+        android:id="@+id/btStart"
+        android:layout_width="150dp"
+        android:layout_height="58dp"
+        android:layout_alignStart="@+id/tvHomeTitle"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-378dp"
+        android:layout_marginBottom="158dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/btStartDryer"
+        android:layout_width="150dp"
+        android:layout_height="58dp"
+        android:layout_alignStart="@+id/tvHomeTitle"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-377dp"
+        android:layout_marginTop="820dp"
+        android:text="Button" />
+
+    <TextView
+        android:id="@+id/tvFavorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="1115dp"
+        android:text="Favorites"
+        android:textSize="24sp" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvProgram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="926dp"
+        android:layout_marginTop="640dp"
+        android:layout_marginEnd="335dp"
+        android:layout_marginBottom="262dp"
+        android:text="Program: "
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tvTimeRemaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="926dp"
+        android:layout_marginTop="845dp"
+        android:layout_marginEnd="258dp"
+        android:layout_marginBottom="57dp"
+        android:text="Time Remaining: "
+        android:textSize="24sp" />
+
+    <ScrollView
+        android:layout_width="234dp"
+        android:layout_height="417dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="238dp"
+        android:layout_marginEnd="1034dp"
+        android:layout_marginBottom="280dp">
+
+        <ListView
+            android:id="@+id/lvFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/ivCartoon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="1008dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="609dp"
+        app:srcCompat="@drawable/washing_cartoon" />
+
+    <ImageView
+        android:id="@+id/ivCircleWasher"
+        android:layout_width="88dp"
+        android:layout_height="109dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="1161dp"
+        android:layout_marginTop="356dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="470dp"
+        app:srcCompat="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="1041dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="238dp"
+        android:layout_marginBottom="502dp"
+        android:text="Washer:"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="1071dp"
+        android:layout_marginTop="510dp"
+        android:layout_marginEnd="233dp"
+        android:layout_marginBottom="392dp"
+        android:text="Dryer:"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="106dp"
+        android:layout_height="101dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="361dp"
+        android:layout_marginTop="760dp"
+        android:layout_marginEnd="898dp"
+        android:layout_marginBottom="74dp"
+        app:srcCompat="@drawable/mic" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="118dp"
+        android:layout_height="117dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="578dp"
+        android:layout_marginTop="739dp"
+        android:layout_marginBottom="79dp"
+        android:cropToPadding="true"
+        app:srcCompat="@drawable/speak" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="140dp"
+        android:layout_height="128dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="745dp"
+        android:layout_marginTop="747dp"
+        android:layout_marginEnd="473dp"
+        android:layout_marginBottom="59dp"
+        app:srcCompat="@drawable/notify" />
+
+</RelativeLayout>
