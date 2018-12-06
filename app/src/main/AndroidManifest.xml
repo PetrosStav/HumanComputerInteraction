@@ -18,6 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".select_program"
+            android:label="Select a Program for Washing"
+            android:screenOrientation="reverseLandscape"/>
     </application>
 
 </manifest>

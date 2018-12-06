@@ -3,4 +3,14 @@
     <string name="app_title">Washing Machine App</string>
     <string name="start_washer">Start</string>
     <string name="start_dryer">Start Dryer</string>
+    <string name="select_program">Select Program</string>
+    <string name="common">Common</string>
+    <string name="materials">Materials</string>
+    <string name="stains">Stains</string>
+    <string name="custom">Custom</string>
+    <string name="prewash">Prewash</string>
+    <string name="eco">ECO</string>
+    <string name="dryer">Dryer</string>
+    <string name="start">Start</string>
+    <string name="cancel">Cancel</string>
 </resources>
