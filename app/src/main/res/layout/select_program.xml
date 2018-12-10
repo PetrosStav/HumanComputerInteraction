@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/start_select"
+        android:layout_width="211dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/start"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancel_select" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="5dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="495dp"
+        android:layout_marginBottom="492dp"
+        android:background="@android:color/black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="317dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="365dp"
+        android:layout_marginEnd="342dp"
+        android:text="@string/select_program"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/info_select"
+        android:layout_width="85dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="241dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/info" />
+
+    <Button
+        android:id="@+id/common_select"
+        android:layout_width="172dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="98dp"
+        android:text="@string/common"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <Button
+        android:id="@+id/stains_select"
+        android:layout_width="172dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginEnd="98dp"
+        android:text="@string/stains"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/custom_select"
+        app:layout_constraintStart_toEndOf="@+id/materials_select"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/custom_select"
+        android:layout_width="172dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/custom"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/info_select" />
+
+    <Button
+        android:id="@+id/materials_select"
+        android:layout_width="172dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="56dp"
+        android:text="@string/materials"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/common_select"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="1010dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/common_select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="1008dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/common_select" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="5dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="21dp"
+        android:background="@android:color/black"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/materials_select"
+        app:layout_constraintStart_toEndOf="@+id/common_select"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="5dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="493dp"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/custom_select"
+        app:layout_constraintStart_toEndOf="@+id/stains_select"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/prewash_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="16dp"
+        android:checked="false"
+        android:text="ToggleButton"
+        android:textAllCaps="false"
+        android:textOff="@string/prewash"
+        android:textOn="@string/prewash"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/eco_select"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/eco_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:checked="false"
+        android:text="ToggleButton"
+        android:textOff="@string/eco"
+        android:textOn="@string/eco"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dryer_select" />
+
+    <ToggleButton
+        android:id="@+id/dryer_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="709dp"
+        android:layout_marginBottom="16dp"
+        android:checked="false"
+        android:text="ToggleButton"
+        android:textAllCaps="false"
+        android:textOff="@string/dryer"
+        android:textOn="@string/dryer"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/cancel_select"
+        android:layout_width="211dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="127dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dryer_select" />
+
+    <GridView
+        android:id="@+id/grid_images_select"
+        android:layout_width="1020dp"
+        android:layout_height="370dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/prewash_select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+</android.support.constraint.ConstraintLayout>
