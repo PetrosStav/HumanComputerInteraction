@@ -5,13 +5,13 @@ import android.os.Bundle;
 
 import it.beppi.knoblibrary.Knob;
 
-public class EditCreateProgram extends AppCompatActivity {
+public class EditProgram extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editcreate_program);
-        setTitle("Edit/Create Program");
+        setContentView(R.layout.activity_edit_program);
+
         Knob knob1 = (Knob) findViewById(R.id.knob1);
         Knob knob2 = (Knob) findViewById(R.id.knob2);
         Knob knob3 = (Knob) findViewById(R.id.knob3);

@@ -20,14 +20,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditCreateProgram"
-            android:label="Edit or Create an advanced program"
+            android:name=".EditProgram"
+            android:label="Edit Program"
             android:screenOrientation="reverseLandscape" />
         <activity
             android:name=".AdvancedProgram"
-            android:label="Create an advanced program"
-            android:screenOrientation="reverseLandscape"
-        />
+            android:label="Create Advanced Program"
+            android:screenOrientation="reverseLandscape" />
+        <activity
+            android:name=".SelectProgram"
+            android:label="Select Program"
+            android:screenOrientation="reverseLandscape" />
     </application>
 
 </manifest>

@@ -6,6 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".AdvancedProgram">
 
+    <ImageView
+        android:id="@+id/ivHeart"
+        android:layout_width="34dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginBottom="136dp"
+        android:src="@drawable/heartico"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvFavorites" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="172dp"
+        android:layout_marginBottom="28dp"
+        android:enabled="false"
+        android:text="Name:"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/tvFavorites"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="188dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toEndOf="@+id/tvName" />
+
+    <TextView
+        android:id="@+id/tvFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginBottom="140dp"
+        android:enabled="false"
+        android:text="Favorites:"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="200dp"
+        android:enabled="false"
+        android:text="Icon:"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelectIco" />
+
+    <Button
+        android:id="@+id/btnSelectIco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="184dp"
+        android:enabled="false"
+        android:text="select "
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <it.beppi.knoblibrary.Knob
         android:id="@+id/knob1"
         android:layout_width="165dp"
@@ -75,44 +154,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/knob3" />
 
-    <ImageView
-        android:id="@+id/ivEco"
-        android:layout_width="147dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="360dp"
-        android:src="@drawable/ecobutton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRpm" />
-
-    <ImageView
-        android:id="@+id/ivPrewash"
-        android:layout_width="147dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="360dp"
-        android:src="@drawable/prewashbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivDryer"
-        app:layout_constraintStart_toEndOf="@+id/ivEco"
-        app:layout_constraintTop_toBottomOf="@+id/tvTemp" />
-
-    <ImageView
-        android:id="@+id/ivDryer"
-        android:layout_width="147dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="360dp"
-        android:src="@drawable/dryerbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTime" />
-
     <Button
         android:id="@+id/btnCancel"
         android:layout_width="128dp"
@@ -142,21 +183,69 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="212dp"
+        android:layout_marginBottom="280dp"
         android:text="Add to custom programs"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cbCustomPrograms"
-        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintHorizontal_bias="0.765"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
         android:id="@+id/cbCustomPrograms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="212dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="280dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnStart" />
+
+    <ToggleButton
+        android:id="@+id/tbEco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="360dp"
+        android:text="ToggleButton"
+        android:textAllCaps="true"
+        android:textOff="Eco"
+        android:textOn="Eco"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRpm"
+        app:layout_constraintVertical_bias="0.478" />
+
+    <ToggleButton
+        android:id="@+id/tbPrewash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="360dp"
+        android:text="ToggleButton"
+        android:textOff="Prewash"
+        android:textOn="Prewash"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tbDryer"
+        app:layout_constraintStart_toEndOf="@+id/tbEco"
+        app:layout_constraintTop_toBottomOf="@+id/tvTemp"
+        app:layout_constraintVertical_bias="0.478" />
+
+    <ToggleButton
+        android:id="@+id/tbDryer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="360dp"
+        android:text="ToggleButton"
+        android:textOff="Dryer"
+        android:textOn="Dryer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime"
+        app:layout_constraintVertical_bias="0.478" />
 
 </android.support.constraint.ConstraintLayout>
