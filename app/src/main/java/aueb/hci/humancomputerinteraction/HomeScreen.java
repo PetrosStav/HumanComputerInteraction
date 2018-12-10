@@ -19,13 +19,22 @@ public class HomeScreen extends AppCompatActivity {
         Button start = findViewById(R.id.btStart);
         Button start_dryer = findViewById(R.id.btStartDryer);
 
-        select_program.setOnClickListener(new View.OnClickListener() {
+//        select_program.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeScreen.this,select_program.class);
+//                startActivityForResult(intent,RESULT_CANCELED);
+//            }
+//        });
+
+        advanced_program.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeScreen.this,select_program.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeScreen.this,AdvancedProgram.class);
                 startActivityForResult(intent,RESULT_CANCELED);
             }
         });
+
     }
 
 
