@@ -31,7 +31,7 @@ public class SelectProgram extends AppCompatActivity {
 
         Bundle data = getIntent().getExtras();
 
-        programData = (ArrayList<Program>)data.get("PROGRAMS");
+        programData = (ArrayList<Program>) data.get("PROGRAMS");
 
         ProgramAdapter adapter = new ProgramAdapter(this);
         adapter.loadData(programData);
