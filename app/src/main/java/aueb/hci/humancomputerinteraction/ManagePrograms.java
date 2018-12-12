@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -27,11 +28,28 @@ public class ManagePrograms extends AppCompatActivity {
 
         ProgramAdapter adapter = new ProgramAdapter(this);
         adapter.loadData(programData, true);
-
         grid_images_select.setAdapter(adapter);
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                programData = (ArrayList<Program>) adapter.getCopyOfData();
+                Intent intent = new Intent();
+                intent.putExtra("PROGRAMS",programData);
+                setResult(Activity.RESULT_OK,intent);
+                finish();
+            }
+        });
 
-
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra("PROGRAMS",programData);
+                setResult(Activity.RESULT_OK,intent);
+                finish();
+            }
+        });
     }
 
     @Override

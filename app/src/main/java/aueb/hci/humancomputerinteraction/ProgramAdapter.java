@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProgramAdapter extends BaseAdapter {
 
@@ -23,9 +24,9 @@ public class ProgramAdapter extends BaseAdapter {
 
     public ProgramAdapter(Context context) {
         this.context = context;
-        what_activity = false;
-        dataList = new ArrayList<>();
-        copyOfData = new ArrayList<>();
+        this.what_activity = false;
+        this.dataList = new ArrayList<>();
+        this.copyOfData = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -43,6 +44,8 @@ public class ProgramAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
+
+    public List<Program> getCopyOfData(){ return this.copyOfData; }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
@@ -118,7 +121,7 @@ public class ProgramAdapter extends BaseAdapter {
     public void loadData(List<Program> data, boolean what_activity){
         this.dataList = data;
         this.what_activity = what_activity;
-        this.copyOfData = dataList.subList(0,dataList.size());
+        this.copyOfData = new ArrayList<>(dataList);
         notifyDataSetChanged();
     }
 }
