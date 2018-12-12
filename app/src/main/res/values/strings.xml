@@ -13,4 +13,11 @@
     <string name="dryer">Dryer</string>
     <string name="start">Start</string>
     <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save_exit">Save and Exit</string>
+    <string name="cancel_go_back">Cancel &amp; Go Back</string>
+    <string name="edit_message">Click on a Program to Edit!!</string>
+    <string name="undo">Undo Previous Action</string>
 </resources>

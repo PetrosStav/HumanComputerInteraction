@@ -1,6 +1,8 @@
 package aueb.hci.humancomputerinteraction;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +19,11 @@ public class ProgramAdapter extends BaseAdapter {
     private Context context;
     private List<Program> dataList, copyOfData;
     private LayoutInflater inflater;
+    private Boolean what_activity;
 
     public ProgramAdapter(Context context) {
         this.context = context;
+        what_activity = false;
         dataList = new ArrayList<>();
         copyOfData = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -46,7 +50,12 @@ public class ProgramAdapter extends BaseAdapter {
         final Program prog = dataList.get(i);
         if(view == null){
             final LayoutInflater layoutInflater = LayoutInflater.from(context);
-            view = layoutInflater.inflate(R.layout.cloth_image_adapter, null);
+            if (what_activity){
+                view = layoutInflater.inflate(R.layout.cloth_image_adapter_manage_programs, null);
+            }else{
+                view = layoutInflater.inflate(R.layout.cloth_image_adapter, null);
+            }
+
         }
 
         ((ImageView)view.findViewById(R.id.ivProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
@@ -79,11 +88,36 @@ public class ProgramAdapter extends BaseAdapter {
             }
         });
 
+        if (what_activity){
+            ((ImageView)view.findViewById(R.id.delete_program)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+                    alert.setCancelable(true);
+                    DialogInterface.OnClickListener Positivelistener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dataList.remove(i);
+                            notifyDataSetChanged();
+                        }
+                    };
+
+                    alert.setMessage("Are you sure you want to delete program: " + prog.getName() + " ?");
+                    alert.setPositiveButton(R.string.yes, Positivelistener);
+                    alert.setNegativeButton(R.string.no, null);
+                    alert.create().show();
+                }
+            });
+
+
+        }
+
         return view;
     }
 
-    public void loadData(List<Program> data){
+    public void loadData(List<Program> data, boolean what_activity){
         this.dataList = data;
+        this.what_activity = what_activity;
         this.copyOfData = dataList.subList(0,dataList.size());
         notifyDataSetChanged();
     }

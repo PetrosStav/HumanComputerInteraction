@@ -71,6 +71,14 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        manage_programs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreen.this,ManagePrograms.class);
+                intent.putExtra("PROGRAMS", (Serializable) programData);
+                startActivityForResult(intent,1);
+            }
+        });
     }
 
 
