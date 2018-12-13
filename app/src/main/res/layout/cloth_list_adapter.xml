@@ -7,21 +7,21 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvFavName"
+        android:id="@+id/tvClothListFavName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:maxWidth="110dp"
         android:text="TextView"
         android:textSize="18sp"
-        android:maxWidth="110dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/ivXsign"
+        android:id="@+id/ivClothListXsign"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginTop="8dp"

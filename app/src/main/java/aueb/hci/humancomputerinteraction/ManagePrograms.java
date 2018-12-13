@@ -18,9 +18,9 @@ public class ManagePrograms extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manage_programs);
-        Button cancel = findViewById(R.id.cancel_select);
-        Button save = findViewById(R.id.start_select);
-        GridView grid_images_select = (GridView) findViewById(R.id.grid_images_select);
+        Button cancel = findViewById(R.id.btnManageCancel);
+        Button save = findViewById(R.id.btnManageSave);
+        GridView grid_images_manage = (GridView) findViewById(R.id.grid_images_manage);
 
         Bundle data = getIntent().getExtras();
 
@@ -28,7 +28,7 @@ public class ManagePrograms extends AppCompatActivity {
 
         ProgramAdapter adapter = new ProgramAdapter(this);
         adapter.loadData(programData, true);
-        grid_images_select.setAdapter(adapter);
+        grid_images_manage.setAdapter(adapter);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

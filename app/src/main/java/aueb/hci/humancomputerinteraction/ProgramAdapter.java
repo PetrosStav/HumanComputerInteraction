@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProgramAdapter extends BaseAdapter {
 
@@ -61,38 +60,71 @@ public class ProgramAdapter extends BaseAdapter {
 
         }
 
-        ((ImageView)view.findViewById(R.id.ivProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
+        if(!what_activity){
 
-        ((TextView) view.findViewById(R.id.tvName)).setText(prog.getName());
+            ((ImageView)view.findViewById(R.id.ivClothImgProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
 
-        if(prog.isFavorited()){
-            ((ImageView)view.findViewById(R.id.heart_custom)).setImageResource(R.drawable.filled_heart);
-        }else{
-            ((ImageView)view.findViewById(R.id.heart_custom)).setImageResource(R.drawable.heartico);
-        }
+            ((TextView) view.findViewById(R.id.tvClothImgName)).setText(prog.getName());
 
-        ((ImageView)view.findViewById(R.id.info_custom)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), prog.getDescription(), Toast.LENGTH_LONG).show();
+            if(prog.isFavorited()){
+                ((ImageView)view.findViewById(R.id.ClothImgHeart)).setImageResource(R.drawable.filled_heart);
+            }else{
+                ((ImageView)view.findViewById(R.id.ClothImgHeart)).setImageResource(R.drawable.heartico);
             }
-        });
 
-        ((ImageView)view.findViewById(R.id.heart_custom)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                prog.setFavorited(!prog.isFavorited());
-                if(prog.isFavorited()){
-                    ((ImageView)view.findViewById(R.id.heart_custom)).setImageResource(R.drawable.filled_heart);
-                }else{
-                    ((ImageView)view.findViewById(R.id.heart_custom)).setImageResource(R.drawable.heartico);
+            ((ImageView)view.findViewById(R.id.ClothImgInfo)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), prog.getDescription(), Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(view.getContext(), prog.getName()+ (prog.isFavorited()?" Favorited!":" Unfavorited!"), Toast.LENGTH_LONG).show();
-            }
-        });
+            });
 
-        if (what_activity){
-            ((ImageView)view.findViewById(R.id.delete_program)).setOnClickListener(new View.OnClickListener() {
+            ((ImageView)view.findViewById(R.id.ClothImgHeart)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    prog.setFavorited(!prog.isFavorited());
+                    if(prog.isFavorited()){
+                        ((ImageView)view.findViewById(R.id.ClothImgHeart)).setImageResource(R.drawable.filled_heart);
+                    }else{
+                        ((ImageView)view.findViewById(R.id.ClothImgHeart)).setImageResource(R.drawable.heartico);
+                    }
+                    Toast.makeText(view.getContext(), prog.getName()+ (prog.isFavorited()?" Favorited!":" Unfavorited!"), Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }else{
+
+            ((ImageView)view.findViewById(R.id.ivClothImgMngProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
+
+            ((TextView) view.findViewById(R.id.tvClothImgMngName)).setText(prog.getName());
+
+            if(prog.isFavorited()){
+                ((ImageView)view.findViewById(R.id.ClothImgMngHeart)).setImageResource(R.drawable.filled_heart);
+            }else{
+                ((ImageView)view.findViewById(R.id.ClothImgMngHeart)).setImageResource(R.drawable.heartico);
+            }
+
+            ((ImageView)view.findViewById(R.id.ClothImgMngInfo)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), prog.getDescription(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            ((ImageView)view.findViewById(R.id.ClothImgMngHeart)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    prog.setFavorited(!prog.isFavorited());
+                    if(prog.isFavorited()){
+                        ((ImageView)view.findViewById(R.id.ClothImgMngHeart)).setImageResource(R.drawable.filled_heart);
+                    }else{
+                        ((ImageView)view.findViewById(R.id.ClothImgMngHeart)).setImageResource(R.drawable.heartico);
+                    }
+                    Toast.makeText(view.getContext(), prog.getName()+ (prog.isFavorited()?" Favorited!":" Unfavorited!"), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            ((ImageView)view.findViewById(R.id.ClothImgMngDelete)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
@@ -111,7 +143,6 @@ public class ProgramAdapter extends BaseAdapter {
                     alert.create().show();
                 }
             });
-
 
         }
 

@@ -7,7 +7,7 @@
     tools:context=".AdvancedProgram">
 
     <ImageView
-        android:id="@+id/ivHeart"
+        android:id="@+id/ivAdvancedHeart"
         android:layout_width="34dp"
         android:layout_height="35dp"
         android:layout_marginStart="58dp"
@@ -15,10 +15,10 @@
         android:src="@drawable/heartico"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvFavorites" />
+        app:layout_constraintStart_toEndOf="@+id/tvAdvancedFavorites" />
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvAdvancedName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="172dp"
@@ -27,11 +27,11 @@
         android:text="Name:"
         android:textSize="24sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/tvFavorites"
+        app:layout_constraintBottom_toTopOf="@+id/tvAdvancedFavorites"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etName"
+        android:id="@+id/etAdvancedName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
@@ -43,12 +43,12 @@
         android:text="Name"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintEnd_toStartOf="@+id/tvEditIcon"
         app:layout_constraintHorizontal_bias="0.437"
-        app:layout_constraintStart_toEndOf="@+id/tvName" />
+        app:layout_constraintStart_toEndOf="@+id/tvAdvancedName" />
 
     <TextView
-        android:id="@+id/tvFavorites"
+        android:id="@+id/tvAdvancedFavorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="164dp"
@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvIcon"
+        android:id="@+id/tvAdvancedIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
@@ -71,10 +71,10 @@
         android:textSize="24sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSelectIco" />
+        app:layout_constraintEnd_toStartOf="@+id/btnAdvancedSelectIco" />
 
     <Button
-        android:id="@+id/btnSelectIco"
+        android:id="@+id/btnAdvancedSelectIco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="164dp"
@@ -86,31 +86,31 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <it.beppi.knoblibrary.Knob
-        android:id="@+id/knob1"
+        android:id="@+id/knob1Advanced"
         android:layout_width="165dp"
         android:layout_height="153dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         app:kNumberOfStates="6"
-        app:layout_constraintEnd_toStartOf="@+id/knob2"
+        app:layout_constraintEnd_toStartOf="@+id/knob2Advanced"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <it.beppi.knoblibrary.Knob
-        android:id="@+id/knob2"
+        android:id="@+id/knob2Advanced"
         android:layout_width="165dp"
         android:layout_height="153dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         app:kNumberOfStates="6"
-        app:layout_constraintEnd_toStartOf="@+id/knob3"
-        app:layout_constraintStart_toEndOf="@+id/knob1"
+        app:layout_constraintEnd_toStartOf="@+id/knob3Advanced"
+        app:layout_constraintStart_toEndOf="@+id/knob1Advanced"
         app:layout_constraintTop_toTopOf="parent" />
 
     <it.beppi.knoblibrary.Knob
-        android:id="@+id/knob3"
+        android:id="@+id/knob3Advanced"
         android:layout_width="165dp"
         android:layout_height="153dp"
         android:layout_marginStart="8dp"
@@ -118,33 +118,33 @@
         android:layout_marginEnd="8dp"
         app:kNumberOfStates="6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/knob2"
+        app:layout_constraintStart_toEndOf="@+id/knob2Advanced"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvRpm"
+        android:id="@+id/tvAdvancedRpm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="256dp"
         android:text="RPM"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/tvTemp"
-        app:layout_constraintTop_toBottomOf="@+id/knob1" />
+        app:layout_constraintEnd_toStartOf="@+id/tvAdvancedTemp"
+        app:layout_constraintTop_toBottomOf="@+id/knob1Advanced" />
 
     <TextView
-        android:id="@+id/tvTemp"
+        android:id="@+id/tvAdvancedTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="264dp"
         android:text="TEMP"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/tvTime"
-        app:layout_constraintTop_toBottomOf="@+id/knob2" />
+        app:layout_constraintEnd_toStartOf="@+id/tvAdvancedTime"
+        app:layout_constraintTop_toBottomOf="@+id/knob2Advanced" />
 
     <TextView
-        android:id="@+id/tvTime"
+        android:id="@+id/tvAdvancedTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -152,10 +152,10 @@
         android:text="TIME"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/knob3" />
+        app:layout_constraintTop_toBottomOf="@+id/knob3Advanced" />
 
     <Button
-        android:id="@+id/btnCancel"
+        android:id="@+id/btnAdvancedCancel"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
@@ -165,7 +165,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnStart"
+        android:id="@+id/btnAdvancedStart"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -175,10 +175,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.326"
-        app:layout_constraintStart_toEndOf="@+id/btnCancel" />
+        app:layout_constraintStart_toEndOf="@+id/btnAdvancedCancel" />
 
     <TextView
-        android:id="@+id/tvCustomPrograms"
+        android:id="@+id/tvAdvancedCustomPrograms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -187,21 +187,21 @@
         android:text="Add to custom programs"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cbCustomPrograms"
+        app:layout_constraintEnd_toStartOf="@+id/cbAdvancedCustomPrograms"
         app:layout_constraintHorizontal_bias="0.765"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
-        android:id="@+id/cbCustomPrograms"
+        android:id="@+id/cbAdvancedCustomPrograms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="280dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnStart" />
+        app:layout_constraintEnd_toStartOf="@+id/btnAdvancedStart" />
 
     <ToggleButton
-        android:id="@+id/tbEco"
+        android:id="@+id/tbAdvancedEco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="164dp"
@@ -213,11 +213,11 @@
         android:textOn="Eco"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRpm"
+        app:layout_constraintTop_toBottomOf="@+id/tvAdvancedRpm"
         app:layout_constraintVertical_bias="0.478" />
 
     <ToggleButton
-        android:id="@+id/tbPrewash"
+        android:id="@+id/tbAdvancedPrewash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -228,13 +228,13 @@
         android:textOff="Prewash"
         android:textOn="Prewash"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tbDryer"
-        app:layout_constraintStart_toEndOf="@+id/tbEco"
-        app:layout_constraintTop_toBottomOf="@+id/tvTemp"
+        app:layout_constraintEnd_toStartOf="@+id/tbAdvancedDryer"
+        app:layout_constraintStart_toEndOf="@+id/tbAdvancedEco"
+        app:layout_constraintTop_toBottomOf="@+id/tvAdvancedTemp"
         app:layout_constraintVertical_bias="0.478" />
 
     <ToggleButton
-        android:id="@+id/tbDryer"
+        android:id="@+id/tbAdvancedDryer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -245,7 +245,7 @@
         android:textOn="Dryer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvAdvancedTime"
         app:layout_constraintVertical_bias="0.478" />
 
 </android.support.constraint.ConstraintLayout>

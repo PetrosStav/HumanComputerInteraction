@@ -1,17 +1,13 @@
 package aueb.hci.humancomputerinteraction;
 
-import android.opengl.Visibility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import it.beppi.knoblibrary.Knob;
 
@@ -22,19 +18,19 @@ public class AdvancedProgram extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_program);
 
-        Knob knob1 = (Knob) findViewById(R.id.knob1);
-        Knob knob2 = (Knob) findViewById(R.id.knob2);
-        Knob knob3 = (Knob) findViewById(R.id.knob3);
+        Knob knob1 = (Knob) findViewById(R.id.knob1Advanced);
+        Knob knob2 = (Knob) findViewById(R.id.knob2Advanced);
+        Knob knob3 = (Knob) findViewById(R.id.knob3Advanced);
 
-        final CheckBox cbCustomPrograms = (CheckBox) findViewById(R.id.cbCustomPrograms);
+        final CheckBox cbCustomPrograms = (CheckBox) findViewById(R.id.cbAdvancedCustomPrograms);
 
-        final TextView tvName = (TextView) findViewById(R.id.tvName);
-        final EditText etName = (EditText) findViewById(R.id.etName);
-        final TextView tvFavorites = (TextView) findViewById(R.id.tvFavorites);
-        final TextView tvIcon = (TextView) findViewById(R.id.tvIcon);
-        final Button btnSelectIco = (Button) findViewById(R.id.btnSelectIco);
-        final Button btnStart = (Button) findViewById(R.id.btnStart);
-        final ImageView ivHeart = (ImageView) findViewById(R.id.ivHeart);
+        final TextView tvName = (TextView) findViewById(R.id.tvAdvancedName);
+        final EditText etName = (EditText) findViewById(R.id.etAdvancedName);
+        final TextView tvFavorites = (TextView) findViewById(R.id.tvAdvancedFavorites);
+        final TextView tvIcon = (TextView) findViewById(R.id.tvAdvancedIcon);
+        final Button btnSelectIco = (Button) findViewById(R.id.btnAdvancedSelectIco);
+        final Button btnStart = (Button) findViewById(R.id.btnAdvancedStart);
+        final ImageView ivHeart = (ImageView) findViewById(R.id.ivAdvancedHeart);
 
         knob1.setState(4);
         knob2.setState(4);

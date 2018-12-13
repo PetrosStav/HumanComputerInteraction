@@ -7,79 +7,70 @@
     tools:context=".EditProgram">
 
     <ToggleButton
-        android:id="@+id/tbEco"
+        android:id="@+id/tbEditEco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="164dp"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="360dp"
         android:text="ToggleButton"
         android:textAllCaps="true"
         android:textOff="Eco"
         android:textOn="Eco"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRpm"
-        app:layout_constraintVertical_bias="0.478" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEditRpm" />
 
     <ToggleButton
-        android:id="@+id/tbPrewash"
+        android:id="@+id/tbEditPrewash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="360dp"
         android:text="ToggleButton"
         android:textOff="Prewash"
         android:textOn="Prewash"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tbDryer"
-        app:layout_constraintStart_toEndOf="@+id/tbEco"
-        app:layout_constraintTop_toBottomOf="@+id/tvTemp"
-        app:layout_constraintVertical_bias="0.478" />
+        app:layout_constraintEnd_toStartOf="@+id/tbEditDryer"
+        app:layout_constraintStart_toEndOf="@+id/tbEditEco"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditTemp" />
 
     <ToggleButton
-        android:id="@+id/tbDryer"
+        android:id="@+id/tbEditDryer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="164dp"
-        android:layout_marginBottom="360dp"
         android:text="ToggleButton"
         android:textOff="Dryer"
         android:textOn="Dryer"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTime"
-        app:layout_constraintVertical_bias="0.478" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEditTime" />
 
     <it.beppi.knoblibrary.Knob
-        android:id="@+id/knob1"
+        android:id="@+id/knob1Edit"
         android:layout_width="165dp"
         android:layout_height="153dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         app:kNumberOfStates="6"
-        app:layout_constraintEnd_toStartOf="@+id/knob2"
+        app:layout_constraintEnd_toStartOf="@+id/knob2Edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <it.beppi.knoblibrary.Knob
-        android:id="@+id/knob2"
+        android:id="@+id/knob2Edit"
         android:layout_width="165dp"
         android:layout_height="153dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         app:kNumberOfStates="6"
-        app:layout_constraintEnd_toStartOf="@+id/knob3"
-        app:layout_constraintStart_toEndOf="@+id/knob1"
+        app:layout_constraintEnd_toStartOf="@+id/knob3Edit"
+        app:layout_constraintStart_toEndOf="@+id/knob1Edit"
         app:layout_constraintTop_toTopOf="parent" />
 
     <it.beppi.knoblibrary.Knob
-        android:id="@+id/knob3"
+        android:id="@+id/knob3Edit"
         android:layout_width="165dp"
         android:layout_height="153dp"
         android:layout_marginStart="8dp"
@@ -87,33 +78,33 @@
         android:layout_marginEnd="8dp"
         app:kNumberOfStates="6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/knob2"
+        app:layout_constraintStart_toEndOf="@+id/knob2Edit"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvRpm"
+        android:id="@+id/tvEditRpm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="256dp"
         android:text="RPM"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/tvTemp"
-        app:layout_constraintTop_toBottomOf="@+id/knob1" />
+        app:layout_constraintEnd_toStartOf="@+id/tvEditTemp"
+        app:layout_constraintTop_toBottomOf="@+id/knob1Edit" />
 
     <TextView
-        android:id="@+id/tvTemp"
+        android:id="@+id/tvEditTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="264dp"
         android:text="TEMP"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/tvTime"
-        app:layout_constraintTop_toBottomOf="@+id/knob2" />
+        app:layout_constraintEnd_toStartOf="@+id/tvEditTime"
+        app:layout_constraintTop_toBottomOf="@+id/knob2Edit" />
 
     <TextView
-        android:id="@+id/tvTime"
+        android:id="@+id/tvEditTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -121,10 +112,10 @@
         android:text="TIME"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/knob3" />
+        app:layout_constraintTop_toBottomOf="@+id/knob3Edit" />
 
     <Button
-        android:id="@+id/btnCancel"
+        android:id="@+id/btnEditCancel"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
@@ -134,7 +125,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btnEditSave"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -143,22 +134,22 @@
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.346"
-        app:layout_constraintStart_toEndOf="@+id/btnCancel" />
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toEndOf="@+id/btnEditCancel" />
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvEditName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginBottom="38dp"
         android:text="Name:"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvFavorites"
+        app:layout_constraintBottom_toTopOf="@+id/tvEditFavorites"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvFavorites"
+        android:id="@+id/tvEditFavorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
@@ -172,46 +163,43 @@
         android:id="@+id/etName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="196dp"
         android:layout_marginBottom="264dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
-        app:layout_constraintHorizontal_bias="0.437"
-        app:layout_constraintStart_toEndOf="@+id/tvName" />
+        app:layout_constraintEnd_toStartOf="@+id/tvEditIcon" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tvEditIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="260dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="264dp"
         android:text="Icon:"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSelectIco" />
+        app:layout_constraintEnd_toStartOf="@+id/btnEditSelectIco" />
 
     <Button
-        android:id="@+id/btnSelectIco"
+        android:id="@+id/btnEditSelectIco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="164dp"
-        android:layout_marginBottom="244dp"
+        android:layout_marginBottom="256dp"
         android:text="select "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/ivHeart"
+        android:id="@+id/ivEditHeart"
         android:layout_width="34dp"
         android:layout_height="35dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginBottom="197dp"
+        android:layout_marginStart="292dp"
+        android:layout_marginBottom="196dp"
         android:src="@drawable/heartico"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvFavorites" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

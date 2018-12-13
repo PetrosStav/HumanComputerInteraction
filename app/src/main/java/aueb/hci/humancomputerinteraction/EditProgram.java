@@ -12,9 +12,9 @@ public class EditProgram extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_program);
 
-        Knob knob1 = (Knob) findViewById(R.id.knob1);
-        Knob knob2 = (Knob) findViewById(R.id.knob2);
-        Knob knob3 = (Knob) findViewById(R.id.knob3);
+        Knob knob1 = (Knob) findViewById(R.id.knob1Advanced);
+        Knob knob2 = (Knob) findViewById(R.id.knob2Advanced);
+        Knob knob3 = (Knob) findViewById(R.id.knob3Advanced);
 
         knob1.setState(4);
         knob2.setState(4);

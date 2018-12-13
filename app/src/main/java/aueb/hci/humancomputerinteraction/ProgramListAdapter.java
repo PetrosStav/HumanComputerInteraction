@@ -52,9 +52,9 @@ public class ProgramListAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.cloth_list_adapter, null);
         }
 
-        ((TextView) view.findViewById(R.id.tvFavName)).setText(prog.getName());
+        ((TextView) view.findViewById(R.id.tvClothListFavName)).setText(prog.getName());
 
-        ((ImageView)view.findViewById(R.id.ivXsign)).setOnClickListener(new View.OnClickListener() {
+        ((ImageView)view.findViewById(R.id.ivClothListXsign)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
