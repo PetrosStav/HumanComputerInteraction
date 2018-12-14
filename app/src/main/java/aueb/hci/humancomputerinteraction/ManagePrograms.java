@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +54,13 @@ public class ManagePrograms extends AppCompatActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ManagePrograms.this,EditProgram.class);
-                intent.putExtra("PROGRAM",adapter.selectedProgram.getName());
-                startActivityForResult(intent,4);
+                if(adapter.selectedProgram!=null){
+                    Intent intent = new Intent(ManagePrograms.this,EditProgram.class);
+                    intent.putExtra("PROGRAM",adapter.selectedProgram.getName());
+                    startActivityForResult(intent,4);
+                }else{
+                    Toast.makeText(ManagePrograms.this, "Choose a program to edit!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

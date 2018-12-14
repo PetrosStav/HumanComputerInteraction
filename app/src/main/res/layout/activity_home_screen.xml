@@ -95,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btManagePrograms" />
 
     <Button
-        android:id="@+id/btStart"
+        android:id="@+id/btStartDryer"
         android:layout_width="157dp"
         android:layout_height="50dp"
         android:layout_marginStart="52dp"
@@ -108,16 +108,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btStartDryer"
+        android:id="@+id/btStart"
         android:layout_width="157dp"
         android:layout_height="50dp"
         android:layout_marginStart="52dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/start_washer"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btStart"
+        app:layout_constraintBottom_toTopOf="@+id/btStartDryer"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

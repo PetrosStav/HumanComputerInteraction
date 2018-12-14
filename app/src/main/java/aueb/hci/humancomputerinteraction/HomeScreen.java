@@ -30,13 +30,17 @@ public class HomeScreen extends AppCompatActivity {
     ProgramListAdapter adapter = null;
     private static boolean initialized = false;
     ProgramDAO programdao = new ProgramDAOmemory();
-    Program selectedProgram = null;
+    static Program selectedProgram = null;
 
     TextView tvProgram = null;
     TextView tvTimeRemaining = null;
     ProgressBar progressBar = null;
     ValueAnimator animator = null;
     ValueAnimator animatorTime = null;
+
+    Button start = null;
+
+    private boolean animCanceled = false;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -62,7 +66,23 @@ public class HomeScreen extends AppCompatActivity {
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
                             // start your activity here
+                            if(animCanceled) {
+                                animCanceled = false;
+                                return;
+                            }
                             Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " has finished bitch!!!", Toast.LENGTH_LONG).show();
+                            selectedProgram = null;
+                            start.setText("Start");
+                        }
+                    });
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                            super.onAnimationCancel(animation);
+                            Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
+                            selectedProgram = null;
+                            start.setText("Start");
+                            animCanceled = true;
                         }
                     });
 
@@ -75,12 +95,26 @@ public class HomeScreen extends AppCompatActivity {
                             tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
                         }
                     });
+
+                    animatorTime.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                            super.onAnimationCancel(animation);
+                            tvProgram.setText("Program: ");
+                            tvTimeRemaining.setText("Time Remaining: ");
+                        }
+                    });
+
                     animatorTime.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
+                            tvProgram.setText("Program: ");
+                            tvTimeRemaining.setText("Time Remaining: ");
                         }
                     });
+
+                    start.setText("Stop");
 
                     animator.start();
                     animatorTime.start();
@@ -111,7 +145,24 @@ public class HomeScreen extends AppCompatActivity {
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
                             // start your activity here
+                            if(animCanceled) {
+                                animCanceled = false;
+                                return;
+                            }
                             Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " has finished bitch!!!", Toast.LENGTH_LONG).show();
+                            selectedProgram = null;
+                            start.setText("Start");
+                        }
+                    });
+
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                            super.onAnimationCancel(animation);
+                            Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
+                            selectedProgram = null;
+                            start.setText("Start");
+                            animCanceled = true;
                         }
                     });
 
@@ -128,8 +179,21 @@ public class HomeScreen extends AppCompatActivity {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
+                            tvProgram.setText("Program: ");
+                            tvTimeRemaining.setText("Time Remaining: ");
                         }
                     });
+
+                    animatorTime.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                            super.onAnimationCancel(animation);
+                            tvProgram.setText("Program: ");
+                            tvTimeRemaining.setText("Time Remaining: ");
+                        }
+                    });
+
+                    start.setText("Stop");
 
                     animator.start();
                     animatorTime.start();
@@ -157,7 +221,7 @@ public class HomeScreen extends AppCompatActivity {
         Button advanced_program = findViewById(R.id.btAdvancedProgram);
         Button manage_programs = findViewById(R.id.btManagePrograms);
         Button help = findViewById(R.id.btHelp);
-        Button start = findViewById(R.id.btStart);
+        start = findViewById(R.id.btStart);
         Button start_dryer = findViewById(R.id.btStartDryer);
         ListView lvFavorites = findViewById(R.id.lvFavorites);
         progressBar = findViewById(R.id.progressBar);
@@ -200,6 +264,83 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreen.this,ManagePrograms.class);
                 startActivityForResult(intent,1);
+            }
+        });
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(start.getText().toString().equals("Start")){
+                    if(selectedProgram != null){
+                        tvProgram.setText("Program: " + selectedProgram.getName());
+
+                        animator = ValueAnimator.ofInt(0, progressBar.getMax());
+                        animator.setInterpolator(new LinearInterpolator());
+                        animator.setDuration(selectedProgram.getTIME()*1000);
+                        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
+                            }
+                        });
+                        animator.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                // start your activity here
+                                if(animCanceled) {
+                                    animCanceled = false;
+                                    return;
+                                }
+                                Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " has finished bitch!!!", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                        animator.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationCancel(Animator animation) {
+                                super.onAnimationCancel(animation);
+                                Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
+                                selectedProgram = null;
+                                start.setText("Start");
+                                animCanceled = true;
+                            }
+                        });
+
+                        animatorTime = ValueAnimator.ofInt(selectedProgram.getTIME(),0);
+                        animatorTime.setInterpolator(new LinearInterpolator());
+                        animatorTime.setDuration(selectedProgram.getTIME()*1000);
+                        animatorTime.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
+                            }
+                        });
+                        animatorTime.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                tvProgram.setText("Program: ");
+                                tvTimeRemaining.setText("Time Remaining: ");
+                            }
+                        });
+
+                        start.setText("Stop");
+
+                        animator.start();
+                        animatorTime.start();
+                    }else{
+                        Toast.makeText(HomeScreen.this, "Choose a favorite program to start!", Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    animator.cancel();
+                    animatorTime.cancel();
+                    // IF WE WANT ADD PAUSE
+                    start.setText("Start");
+                    selectedProgram = null;
+                }
+
+
             }
         });
     }

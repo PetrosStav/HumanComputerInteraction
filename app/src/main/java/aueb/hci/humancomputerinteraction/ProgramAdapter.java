@@ -105,11 +105,16 @@ public class ProgramAdapter extends BaseAdapter {
             view.findViewById(R.id.ClothImgView).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    selectedProgram = prog;
-                    if(previousView!=null) previousView.setBackgroundColor(Color.WHITE);
-                    view.setBackgroundColor(Color.GRAY);
-                    previousView = view;
-
+                    if(previousView==view) {
+                        view.setBackgroundColor(Color.WHITE);
+                        selectedProgram = null;
+                        previousView = null;
+                    }else {
+                        selectedProgram = prog;
+                        if (previousView != null) previousView.setBackgroundColor(Color.WHITE);
+                        view.setBackgroundColor(Color.GRAY);
+                        previousView = view;
+                    }
                 }
             });
 
@@ -169,10 +174,16 @@ public class ProgramAdapter extends BaseAdapter {
             view.findViewById(R.id.ClothImgView).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    selectedProgram = prog;
-                    if(previousView!=null) previousView.setBackgroundColor(Color.WHITE);
-                    view.setBackgroundColor(Color.GRAY);
-                    previousView = view;
+                    if(previousView==view) {
+                        view.setBackgroundColor(Color.WHITE);
+                        selectedProgram = null;
+                        previousView = null;
+                    }else {
+                        selectedProgram = prog;
+                        if (previousView != null) previousView.setBackgroundColor(Color.WHITE);
+                        view.setBackgroundColor(Color.GRAY);
+                        previousView = view;
+                    }
                 }
             });
 

@@ -3,6 +3,8 @@ package aueb.hci.humancomputerinteraction;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,10 @@ public class ProgramListAdapter extends BaseAdapter {
     private Context context;
     private List<Program> dataList, copyOfData;
     private LayoutInflater inflater;
+
+    public Program selectedProgram;
+
+    private View previousView;
 
     public ProgramListAdapter(Context context) {
         this.context = context;
@@ -51,6 +57,23 @@ public class ProgramListAdapter extends BaseAdapter {
             final LayoutInflater layoutInflater = LayoutInflater.from(context);
             view = layoutInflater.inflate(R.layout.cloth_list_adapter, null);
         }
+
+        ((ConstraintLayout)view.findViewById(R.id.clothListLayout)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(previousView==view){
+                    view.setBackgroundColor(Color.WHITE);
+                    selectedProgram = null;
+                    previousView = null;
+                }else {
+                    selectedProgram = prog;
+                    if (previousView != null) previousView.setBackgroundColor(Color.WHITE);
+                    view.setBackgroundColor(Color.GRAY);
+                    previousView = view;
+                }
+                HomeScreen.selectedProgram = selectedProgram;
+            }
+        });
 
         ((TextView) view.findViewById(R.id.tvClothListFavName)).setText(prog.getName());
 

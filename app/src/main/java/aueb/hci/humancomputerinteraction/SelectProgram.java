@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,10 +53,15 @@ public class SelectProgram extends AppCompatActivity {
         btnSelectStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra("PROGRAM_NAME",adapter.selectedProgram.getName());
-                setResult(Activity.RESULT_OK,intent);
-                finish();
+                if(adapter.selectedProgram!=null){
+                    Intent intent = new Intent();
+                    intent.putExtra("PROGRAM_NAME",adapter.selectedProgram.getName());
+                    setResult(Activity.RESULT_OK,intent);
+                    finish();
+                }else{
+                    Toast.makeText(SelectProgram.this, "Choose a program to start!", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
