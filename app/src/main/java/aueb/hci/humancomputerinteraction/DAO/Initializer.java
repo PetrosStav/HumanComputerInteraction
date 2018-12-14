@@ -28,7 +28,7 @@ public abstract class Initializer {
         p2.setName("P2");
         p2.setDescription("Program 2 bitch");
         p2.setFavorited(false);
-        p2.setTIME(10);
+        p2.setTIME(20);
         p2.setRPM(600);
         p2.setTEMP(45);
 
@@ -46,7 +46,7 @@ public abstract class Initializer {
         p4.setName("Program 4");
         p4.setDescription("Program 4 bitch");
         p4.setFavorited(false);
-        p4.setTIME(50);
+        p4.setTIME(80);
         p4.setRPM(1000);
         p4.setTEMP(90);
 
