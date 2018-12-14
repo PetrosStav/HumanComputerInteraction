@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class HomeScreen extends AppCompatActivity {
     ProgressBar progressBar = null;
     ValueAnimator animator = null;
     ValueAnimator animatorTime = null;
-
+    ImageView ivCircleWasher, ivCircleDryer; // TODO NA TA GEMIZOUME ME XRWMA OPOTE TREXEI KATI
     Button start = null;
 
     private boolean animCanceled = false;
@@ -46,9 +47,11 @@ public class HomeScreen extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
             case 3:
+                programData = programdao.findAll();
+                adapter.loadData(programData);
                 if(resultCode == Activity.RESULT_OK){
-                    Bundle data_select = data.getExtras();
-                    selectedProgram = (Program)data_select.get("PROGRAM");
+//                    Bundle data_select = data.getExtras(); TODO EBGALA TO INTENT APO THN ADVANCED PROGRAM KAI EKANA HomeScreen.selectedProgram = advProg;
+//                    selectedProgram = (Program)data_select.get("PROGRAM");
 
                     tvProgram.setText("Program: " + selectedProgram.getName());
 
@@ -207,10 +210,6 @@ public class HomeScreen extends AppCompatActivity {
                 }
                 break;
         }
-        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
-            programData = programdao.findAll();
-            adapter.loadData(programData);
-        }
     }
 
     @Override
@@ -221,6 +220,8 @@ public class HomeScreen extends AppCompatActivity {
         Button advanced_program = findViewById(R.id.btAdvancedProgram);
         Button manage_programs = findViewById(R.id.btManagePrograms);
         Button help = findViewById(R.id.btHelp);
+        ivCircleWasher = findViewById(R.id.ivCircleWasher);
+        ivCircleDryer = findViewById(R.id.ivCircleDryer);
         start = findViewById(R.id.btStart);
         Button start_dryer = findViewById(R.id.btStartDryer);
         ListView lvFavorites = findViewById(R.id.lvFavorites);
@@ -273,7 +274,6 @@ public class HomeScreen extends AppCompatActivity {
                 if(start.getText().toString().equals("Start")){
                     if(selectedProgram != null){
                         tvProgram.setText("Program: " + selectedProgram.getName());
-
                         animator = ValueAnimator.ofInt(0, progressBar.getMax());
                         animator.setInterpolator(new LinearInterpolator());
                         animator.setDuration(selectedProgram.getTIME()*1000);

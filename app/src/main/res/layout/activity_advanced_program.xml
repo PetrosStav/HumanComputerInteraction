@@ -39,8 +39,8 @@
         android:layout_marginBottom="188dp"
         android:ems="10"
         android:enabled="false"
+        android:hint="Name"
         android:inputType="textPersonName"
-        android:text="Name"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvEditIcon"
@@ -92,7 +92,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
+        app:kShowBalloonValues="true"
+        app:kFreeRotation="false"
+        app:kMaxAngle="120.0"
+        app:kMinAngle="-120.0"
         app:kNumberOfStates="6"
+        app:kBalloonValuesArray="@array/balloon_values_rpms"
         app:layout_constraintEnd_toStartOf="@+id/knob2Advanced"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -104,7 +109,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
+        app:kShowBalloonValues="true"
+        app:kFreeRotation="false"
+        app:kMaxAngle="120.0"
+        app:kMinAngle="-120.0"
         app:kNumberOfStates="6"
+        app:kBalloonValuesArray="@array/balloon_values_temps"
         app:layout_constraintEnd_toStartOf="@+id/knob3Advanced"
         app:layout_constraintStart_toEndOf="@+id/knob1Advanced"
         app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +126,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        app:kNumberOfStates="6"
+        app:kShowBalloonValues="true"
+        app:kFreeRotation="false"
+        app:kMaxAngle="120.0"
+        app:kMinAngle="-120.0"
+        app:kNumberOfStates="11"
+        app:kBalloonValuesArray="@array/balloon_values_times"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/knob2Advanced"
         app:layout_constraintTop_toTopOf="parent" />
@@ -127,7 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="256dp"
-        android:text="RPM"
+        android:text="RPM:"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/tvAdvancedTemp"
         app:layout_constraintTop_toBottomOf="@+id/knob1Advanced" />
@@ -138,7 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="264dp"
-        android:text="TEMP"
+        android:text="TEMP:"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/tvAdvancedTime"
         app:layout_constraintTop_toBottomOf="@+id/knob2Advanced" />
@@ -149,7 +164,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="188dp"
-        android:text="TIME"
+        android:text="TIME:"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/knob3Advanced" />
@@ -247,5 +262,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAdvancedTime"
         app:layout_constraintVertical_bias="0.478" />
+
+    <EditText
+        android:id="@+id/etRpmAdv"
+        android:layout_width="80dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/tvAdvancedTemp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvAdvancedRpm"
+        app:layout_constraintTop_toBottomOf="@+id/knob1Advanced" />
+
+    <EditText
+        android:id="@+id/etTempAdv"
+        android:layout_width="80dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/tvAdvancedTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvAdvancedTemp"
+        app:layout_constraintTop_toBottomOf="@+id/knob2Advanced" />
+
+    <EditText
+        android:id="@+id/etTimeAdv"
+        android:layout_width="80dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvAdvancedTime"
+        app:layout_constraintTop_toBottomOf="@+id/knob3Advanced" />
 
 </android.support.constraint.ConstraintLayout>

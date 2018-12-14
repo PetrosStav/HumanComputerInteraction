@@ -21,7 +21,7 @@ public abstract class Initializer {
         p1.setFavorited(true);
         p1.setDryer(true);
         p1.setTIME(60);
-        p1.setRPM(200);
+        p1.setRPM(400);
         p1.setTEMP(45);
 
         Program p2 = new Program();

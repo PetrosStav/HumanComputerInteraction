@@ -25,9 +25,9 @@ public class Program implements Serializable{
         this.eco = false;
         this.prewash = false;
         this.dryer = false;
-        this.RPM = 200;
-        this.TIME = 10;
-        this.TEMP = 15;
+        this.RPM = 400;
+        this.TIME = 20;
+        this.TEMP = 20;
     }
 
     public Program(Program p){
