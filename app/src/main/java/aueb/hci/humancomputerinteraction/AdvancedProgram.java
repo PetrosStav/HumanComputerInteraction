@@ -1,5 +1,7 @@
 package aueb.hci.humancomputerinteraction;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,13 @@ import android.widget.TextView;
 import it.beppi.knoblibrary.Knob;
 
 public class AdvancedProgram extends AppCompatActivity {
+
+    Button btnCancel = null;
+    Button btnSelectIco = null;
+    Button btnStart = null;
+    ImageView ivHeart = null;
+
+    Program advProg = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +37,17 @@ public class AdvancedProgram extends AppCompatActivity {
         final EditText etName = (EditText) findViewById(R.id.etAdvancedName);
         final TextView tvFavorites = (TextView) findViewById(R.id.tvAdvancedFavorites);
         final TextView tvIcon = (TextView) findViewById(R.id.tvAdvancedIcon);
-        final Button btnSelectIco = (Button) findViewById(R.id.btnAdvancedSelectIco);
-        final Button btnStart = (Button) findViewById(R.id.btnAdvancedStart);
-        final ImageView ivHeart = (ImageView) findViewById(R.id.ivAdvancedHeart);
+        btnSelectIco = (Button) findViewById(R.id.btnAdvancedSelectIco);
+        btnStart = (Button) findViewById(R.id.btnAdvancedStart);
+        btnCancel = (Button) findViewById(R.id.btnAdvancedCancel);
+        ivHeart = (ImageView) findViewById(R.id.ivAdvancedHeart);
+
+        advProg = new Program();
+        advProg.setName("Advanced Program");
+        advProg.setFavorited(false);
+        advProg.setRPM(200);
+        advProg.setTEMP(15);
+        advProg.setTIME(10);
 
         knob1.setState(4);
         knob2.setState(4);
@@ -54,6 +71,25 @@ public class AdvancedProgram extends AppCompatActivity {
             @Override
             public void onState(int state) {
                 // do something
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                setResult(Activity.RESULT_CANCELED,intent);
+                finish();
+            }
+        });
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra("PROGRAM", advProg);
+                setResult(Activity.RESULT_OK,intent);
+                finish();
             }
         });
 

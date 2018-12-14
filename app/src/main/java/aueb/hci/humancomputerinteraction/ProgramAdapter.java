@@ -3,6 +3,7 @@ package aueb.hci.humancomputerinteraction;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import aueb.hci.humancomputerinteraction.DAO.ProgramDAO;
+
 public class ProgramAdapter extends BaseAdapter {
 
     private Context context;
     private List<Program> dataList, copyOfData;
     private LayoutInflater inflater;
     private Boolean what_activity;
+
+    public Program selectedProgram;
+
+    private View previousView;
+
+    private ProgramDAO programdao = new ProgramDAOmemory();
 
     public ProgramAdapter(Context context) {
         this.context = context;
@@ -50,6 +59,7 @@ public class ProgramAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         final Program prog = dataList.get(i);
+
         if(view == null){
             final LayoutInflater layoutInflater = LayoutInflater.from(context);
             if (what_activity){
@@ -89,6 +99,17 @@ public class ProgramAdapter extends BaseAdapter {
                         ((ImageView)view.findViewById(R.id.ClothImgHeart)).setImageResource(R.drawable.heartico);
                     }
                     Toast.makeText(view.getContext(), prog.getName()+ (prog.isFavorited()?" Favorited!":" Unfavorited!"), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            view.findViewById(R.id.ClothImgView).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    selectedProgram = prog;
+                    if(previousView!=null) previousView.setBackgroundColor(Color.WHITE);
+                    view.setBackgroundColor(Color.GRAY);
+                    previousView = view;
+
                 }
             });
 
@@ -133,6 +154,7 @@ public class ProgramAdapter extends BaseAdapter {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dataList.remove(i);
+                            programdao.delete(prog);
                             notifyDataSetChanged();
                         }
                     };
@@ -141,6 +163,16 @@ public class ProgramAdapter extends BaseAdapter {
                     alert.setPositiveButton(R.string.yes, Positivelistener);
                     alert.setNegativeButton(R.string.no, null);
                     alert.create().show();
+                }
+            });
+
+            view.findViewById(R.id.ClothImgView).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    selectedProgram = prog;
+                    if(previousView!=null) previousView.setBackgroundColor(Color.WHITE);
+                    view.setBackgroundColor(Color.GRAY);
+                    previousView = view;
                 }
             });
 

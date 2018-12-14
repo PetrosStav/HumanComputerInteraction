@@ -16,8 +16,8 @@
     <string name="save">Save</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="save_exit">Save and Exit</string>
-    <string name="cancel_go_back">Cancel &amp; Go Back</string>
+    <string name="edit">Edit</string>
+    <string name="go_back">Go Back</string>
     <string name="edit_message">Click on a Program to Edit!!</string>
     <string name="undo">Undo Previous Action</string>
 </resources>

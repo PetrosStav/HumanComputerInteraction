@@ -7,13 +7,13 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btnManageSave"
+        android:id="@+id/btnManageEdit"
         android:layout_width="211dp"
         android:layout_height="47dp"
         android:layout_marginStart="59dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="36dp"
-        android:text="@string/save_exit"
+        android:text="@string/edit"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -32,12 +32,12 @@
         app:srcCompat="@drawable/info" />
 
     <Button
-        android:id="@+id/btnManageCancel"
+        android:id="@+id/btnManageGoBack"
         android:layout_width="211dp"
         android:layout_height="47dp"
         android:layout_marginStart="240dp"
         android:layout_marginBottom="36dp"
-        android:text="@string/cancel_go_back"
+        android:text="@string/go_back"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"

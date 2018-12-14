@@ -24,10 +24,12 @@
         <activity
             android:name=".EditProgram"
             android:label="Edit Program"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="reverseLandscape" />
         <activity
             android:name=".AdvancedProgram"
             android:label="Create Advanced Program"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="reverseLandscape" />
         <activity
             android:name=".SelectProgram"

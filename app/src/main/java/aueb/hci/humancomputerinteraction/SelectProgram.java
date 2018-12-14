@@ -4,14 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import aueb.hci.humancomputerinteraction.DAO.ProgramDAO;
 
 public class SelectProgram extends AppCompatActivity {
 
-    ArrayList<Program> programData = null;
+    List<Program> programData = null;
+    ProgramDAO programdao = new ProgramDAOmemory();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,26 +33,41 @@ public class SelectProgram extends AppCompatActivity {
         Button btnSelectStart = findViewById(R.id.btnSelectStart);
         GridView grid_images_select = (GridView) findViewById(R.id.grid_images_select);
 
-        Bundle data = getIntent().getExtras();
-
-        programData = (ArrayList<Program>) data.get("PROGRAMS");
+        programData = programdao.findAll();
 
         ProgramAdapter adapter = new ProgramAdapter(this);
         adapter.loadData(programData, false);
 
         grid_images_select.setAdapter(adapter);
 
+        btnSelectCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                setResult(Activity.RESULT_CANCELED,intent);
+                finish();
+            }
+        });
 
+        btnSelectStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra("PROGRAM_NAME",adapter.selectedProgram.getName());
+                setResult(Activity.RESULT_OK,intent);
+                finish();
+            }
+        });
 
     }
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra("PROGRAMS",programData);
+        //intent.putExtra("PROGRAMS",programData);
         setResult(Activity.RESULT_OK,intent);
         finish();
-//        super.onBackPressed();
+        //super.onBackPressed();
     }
 
 }

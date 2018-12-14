@@ -17,6 +17,45 @@ public class Program implements Serializable{
     private int TIME;
     private int TEMP;
 
+    public Program() {
+        this.name = "DEFAULT";
+        this.favorited = false;
+        this.imagePath = "NA";
+        this.description = "NA";
+        this.eco = false;
+        this.prewash = false;
+        this.dryer = false;
+        this.RPM = 200;
+        this.TIME = 10;
+        this.TEMP = 15;
+    }
+
+    public Program(Program p){
+        this.name = p.name;
+        this.favorited = p.favorited;
+        this.imagePath = p.imagePath;
+        this.description = p.description;
+        this.eco = p.eco;
+        this.prewash = p.prewash;
+        this.dryer = p.dryer;
+        this.RPM = p.RPM;
+        this.TIME = p.TIME;
+        this.TEMP = p.TEMP;
+    }
+
+    public Program(String name, boolean favorited, String imagePath, String description, boolean eco, boolean prewash, boolean dryer, int RPM, int TIME, int TEMP) {
+        this.name = name;
+        this.favorited = favorited;
+        this.imagePath = imagePath;
+        this.description = description;
+        this.eco = eco;
+        this.prewash = prewash;
+        this.dryer = dryer;
+        this.RPM = RPM;
+        this.TIME = TIME;
+        this.TEMP = TEMP;
+    }
+
     public String getName() {
         return name;
     }
