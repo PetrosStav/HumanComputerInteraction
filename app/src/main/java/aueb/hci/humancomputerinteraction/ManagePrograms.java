@@ -2,6 +2,7 @@ package aueb.hci.humancomputerinteraction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,8 @@ public class ManagePrograms extends AppCompatActivity {
         Button edit = findViewById(R.id.btnManageEdit);
         GridView grid_images_manage = (GridView) findViewById(R.id.grid_images_manage);
 
+        findViewById(R.id.ivManageCartoon).setBackgroundColor(Color.parseColor("#FAFAFAFA"));
+
         programData = programdao.findAll();
 
         adapter = new ProgramAdapter(this);
@@ -55,9 +58,13 @@ public class ManagePrograms extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(adapter.selectedProgram!=null){
-                    Intent intent = new Intent(ManagePrograms.this,EditProgram.class);
-                    intent.putExtra("PROGRAM",adapter.selectedProgram.getName());
-                    startActivityForResult(intent,4);
+                    if(HomeScreen.selectedProgram!=null && HomeScreen.selectedProgram.getName().equals(adapter.selectedProgram.getName())){
+                        Toast.makeText(ManagePrograms.this, "Program " + HomeScreen.selectedProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
+                    }else {
+                        Intent intent = new Intent(ManagePrograms.this, EditProgram.class);
+                        intent.putExtra("PROGRAM", adapter.selectedProgram.getName());
+                        startActivityForResult(intent, 4);
+                    }
                 }else{
                     Toast.makeText(ManagePrograms.this, "Choose a program to edit!", Toast.LENGTH_LONG).show();
                 }

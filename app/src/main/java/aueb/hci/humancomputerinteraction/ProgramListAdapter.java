@@ -25,7 +25,7 @@ public class ProgramListAdapter extends BaseAdapter {
 
     public Program selectedProgram;
 
-    private View previousView;
+    public View previousView;
 
     public ProgramListAdapter(Context context) {
         this.context = context;
@@ -62,12 +62,12 @@ public class ProgramListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 if(previousView==view){
-                    view.setBackgroundColor(Color.WHITE);
+                    view.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
                     selectedProgram = null;
                     previousView = null;
                 }else {
                     selectedProgram = prog;
-                    if (previousView != null) previousView.setBackgroundColor(Color.WHITE);
+                    if (previousView != null) previousView.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
                     view.setBackgroundColor(Color.GRAY);
                     previousView = view;
                 }

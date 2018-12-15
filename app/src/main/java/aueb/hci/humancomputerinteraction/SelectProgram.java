@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +28,9 @@ public class SelectProgram extends AppCompatActivity {
         Button materials_select = findViewById(R.id.materials_select);
         Button stains_select = findViewById(R.id.stains_select);
         Button custom_select = findViewById(R.id.custom_select);
-        Button tbSelectPrewash = findViewById(R.id.tbSelectPrewash);
-        Button tbSelectEco = findViewById(R.id.tbSelectEco);
-        Button tbSelectDryer = findViewById(R.id.tbSelectDryer);
+        ToggleButton tbSelectPrewash = findViewById(R.id.tbSelectPrewash);
+        ToggleButton tbSelectEco = findViewById(R.id.tbSelectEco);
+        ToggleButton tbSelectDryer = findViewById(R.id.tbSelectDryer);
         Button btnSelectCancel = findViewById(R.id.btnSelectCancel);
         Button btnSelectStart = findViewById(R.id.btnSelectStart);
         GridView grid_images_select = (GridView) findViewById(R.id.grid_images_select);
@@ -53,9 +54,24 @@ public class SelectProgram extends AppCompatActivity {
         btnSelectStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(adapter.selectedProgram!=null){
+                if(HomeScreen.selectedProgram!=null){
+                    Toast.makeText(SelectProgram.this, "Program " + HomeScreen.selectedProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
+                }else if(adapter.selectedProgram!=null){
                     Intent intent = new Intent();
-                    intent.putExtra("PROGRAM_NAME",adapter.selectedProgram.getName());
+                    //intent.putExtra("PROGRAM_NAME",adapter.selectedProgram.getName()); // TODO esbhsa tote kai egw apo to select program to intent
+                    Program overProg = new Program(adapter.selectedProgram);
+                    // Override only if checked
+                    if(tbSelectEco.isChecked()){
+                        overProg.setEco(true);
+                    }
+                    if(tbSelectPrewash.isChecked()) {
+                        overProg.setPrewash(true);
+                    }
+                    if(tbSelectDryer.isChecked()) {
+                        overProg.setDryer(true);
+                    }
+
+                    HomeScreen.selectedProgram = overProg;
                     setResult(Activity.RESULT_OK,intent);
                     finish();
                 }else{
@@ -71,7 +87,7 @@ public class SelectProgram extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent();
         //intent.putExtra("PROGRAMS",programData);
-        setResult(Activity.RESULT_OK,intent);
+        setResult(Activity.RESULT_CANCELED,intent);
         finish();
         //super.onBackPressed();
     }

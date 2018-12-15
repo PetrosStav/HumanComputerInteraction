@@ -44,6 +44,14 @@ public class AdvancedProgram extends AppCompatActivity {
     EditText etTimeAdv = null;
 
     @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Intent intent = new Intent();
+        setResult(Activity.RESULT_CANCELED,intent);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_program);
@@ -146,31 +154,35 @@ public class AdvancedProgram extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (btnStart.getText().toString().equals("Save and Start")) { //TODO IDIOUS ELEGXOUS KAI STHN EDIT ME TA ONOMATA
-                                                                             //TODO FANTAZOMAI DEN XREIAZOMASTE ELEGXOUS GIA DESCRIPTION
-                    if(advProg.getName().equals("Advanced Program") && etName.getText().toString().equals("")) {
+                if(HomeScreen.selectedProgram!=null){
+                    Toast.makeText(AdvancedProgram.this, "Program " + HomeScreen.selectedProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
+                }else {
+                    if (btnStart.getText().toString().equals("Save and Start")) { //TODO IDIOUS ELEGXOUS KAI STHN EDIT ME TA ONOMATA
+                        //TODO FANTAZOMAI DEN XREIAZOMASTE ELEGXOUS GIA DESCRIPTION
+                        if (advProg.getName().equals("Advanced Program") && etName.getText().toString().equals("")) {
 
-                        Toast.makeText(view.getContext(), "Please specify a name for the program!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(view.getContext(), "Please specify a name for the program!!", Toast.LENGTH_SHORT).show();
 
-                    }else if (programDAO.find(etName.getText().toString()) != null){
+                        } else if (programDAO.find(etName.getText().toString()) != null) {
 
-                        Toast.makeText(view.getContext(), "Program name already exists bitch!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(view.getContext(), "Program name already exists bitch!!", Toast.LENGTH_SHORT).show();
 
-                    }else{
+                        } else {
 
-                        advProg.setName(etName.getText().toString());
-                        programDAO.save(advProg);
+                            advProg.setName(etName.getText().toString());
+                            programDAO.save(advProg);
+                            HomeScreen.selectedProgram = advProg;
+                            Intent intent = new Intent();
+                            setResult(Activity.RESULT_OK, intent);
+                            finish();
+
+                        }
+                    } else {
                         HomeScreen.selectedProgram = advProg;
                         Intent intent = new Intent();
-                        setResult(Activity.RESULT_OK,intent);
+                        setResult(Activity.RESULT_OK, intent);
                         finish();
-
                     }
-                }else{
-                    HomeScreen.selectedProgram = advProg;
-                    Intent intent = new Intent();
-                    setResult(Activity.RESULT_OK,intent);
-                    finish();
                 }
             }
         });
@@ -223,5 +235,7 @@ public class AdvancedProgram extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 }

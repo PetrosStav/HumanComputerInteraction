@@ -102,16 +102,16 @@ public class ProgramAdapter extends BaseAdapter {
                 }
             });
 
-            view.findViewById(R.id.ClothImgView).setOnClickListener(new View.OnClickListener() {
+            view.findViewById(R.id.clothImgLayout).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(previousView==view) {
-                        view.setBackgroundColor(Color.WHITE);
+                        view.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
                         selectedProgram = null;
                         previousView = null;
                     }else {
                         selectedProgram = prog;
-                        if (previousView != null) previousView.setBackgroundColor(Color.WHITE);
+                        if (previousView != null) previousView.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
                         view.setBackgroundColor(Color.GRAY);
                         previousView = view;
                     }
@@ -171,16 +171,16 @@ public class ProgramAdapter extends BaseAdapter {
                 }
             });
 
-            view.findViewById(R.id.ClothImgView).setOnClickListener(new View.OnClickListener() {
+            view.findViewById(R.id.clothImgMngLayout).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(previousView==view) {
-                        view.setBackgroundColor(Color.WHITE);
+                        view.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
                         selectedProgram = null;
                         previousView = null;
                     }else {
                         selectedProgram = prog;
-                        if (previousView != null) previousView.setBackgroundColor(Color.WHITE);
+                        if (previousView != null) previousView.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
                         view.setBackgroundColor(Color.GRAY);
                         previousView = view;
                     }

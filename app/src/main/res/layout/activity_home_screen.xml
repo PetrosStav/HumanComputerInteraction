@@ -8,9 +8,32 @@
     tools:context=".HomeScreen">
 
     <ImageView
+        android:id="@+id/ivCirclePrewasher"
+        android:layout_width="63dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="132dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCartoon"
+        app:srcCompat="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/tvHomePrewasher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:text="Prewasher:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/ivCirclePrewasher"
+        app:layout_constraintTop_toBottomOf="@+id/ivCartoon" />
+
+    <ImageView
         android:id="@+id/ivCircleDryer"
-        android:layout_width="69dp"
-        android:layout_height="75dp"
+        android:layout_width="63dp"
+        android:layout_height="68dp"
         android:layout_marginEnd="132dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivCircleWasher"
@@ -192,33 +215,30 @@
 
     <ImageView
         android:id="@+id/ivCircleWasher"
-        android:layout_width="69dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="17dp"
+        android:layout_width="63dp"
+        android:layout_height="68dp"
         android:layout_marginEnd="132dp"
-        app:layout_constraintBottom_toTopOf="@+id/ivCircleDryer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivCartoon"
+        app:layout_constraintTop_toBottomOf="@+id/ivCirclePrewasher"
         app:srcCompat="@drawable/circle" />
 
     <TextView
         android:id="@+id/tvHomeWasher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="16dp"
         android:text="Washer:"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/ivCircleWasher"
-        app:layout_constraintTop_toBottomOf="@+id/ivCartoon" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHomePrewasher" />
 
     <TextView
         android:id="@+id/tvHomeDryer"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="192dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:text="Dryer:"
@@ -226,7 +246,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/ivCircleDryer"
-        app:layout_constraintStart_toEndOf="@+id/btManagePrograms"
         app:layout_constraintTop_toBottomOf="@+id/tvHomeWasher" />
 
     <ImageView
