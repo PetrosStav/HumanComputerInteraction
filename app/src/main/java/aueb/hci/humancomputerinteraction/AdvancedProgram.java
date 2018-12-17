@@ -174,7 +174,7 @@ public class AdvancedProgram extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(HomeScreen.runningProgram!=null){
-                    Toast.makeText(AdvancedProgram.this, "Program " + HomeScreen.runningProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdvancedProgram.this, HomeScreen.runningProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
                 }else {
                     if (btnStart.getText().toString().equals("Save and Start")) {
                         if (advProg.getName().equals("Advanced Program") && etName.getText().toString().equals("")) {

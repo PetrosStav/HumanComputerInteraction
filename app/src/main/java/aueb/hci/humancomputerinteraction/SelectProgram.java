@@ -55,7 +55,7 @@ public class SelectProgram extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(HomeScreen.runningProgram!=null){
-                    Toast.makeText(SelectProgram.this, "Program " + HomeScreen.runningProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SelectProgram.this, HomeScreen.runningProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
                 }else if(adapter.selectedProgram!=null){
                     Intent intent = new Intent();
                     //intent.putExtra("PROGRAM_NAME",adapter.selectedProgram.getName()); // TODO esbhsa tote kai egw apo to select program to intent

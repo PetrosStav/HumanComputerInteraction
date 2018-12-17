@@ -122,7 +122,7 @@ public class HomeScreen extends AppCompatActivity {
                                 animCanceled = false;
                                 return;
                             }
-                            Toast.makeText(HomeScreen.this, "Program: " + runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(HomeScreen.this, runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
 
                             if(runningProgram.isDryer()){
 
@@ -209,7 +209,7 @@ public class HomeScreen extends AppCompatActivity {
                         @Override
                         public void onAnimationCancel(Animator animation) {
                             super.onAnimationCancel(animation);
-                            Toast.makeText(HomeScreen.this, "Program: " + runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(HomeScreen.this, runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
                             runningProgram = null;
                             animCanceled = true;
                         }
@@ -312,7 +312,7 @@ public class HomeScreen extends AppCompatActivity {
                         animCanceled = false;
                         return;
                     }
-                    Toast.makeText(HomeScreen.this, "Program: " + runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomeScreen.this, runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
 
                     if(runningProgram.isDryer()){
 
@@ -399,7 +399,7 @@ public class HomeScreen extends AppCompatActivity {
                 @Override
                 public void onAnimationCancel(Animator animation) {
                     super.onAnimationCancel(animation);
-                    Toast.makeText(HomeScreen.this, "Program: " + runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomeScreen.this, runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
                     runningProgram = null;
                     animCanceled = true;
                 }

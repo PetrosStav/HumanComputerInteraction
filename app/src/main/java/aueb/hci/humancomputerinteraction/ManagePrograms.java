@@ -62,7 +62,7 @@ public class ManagePrograms extends AppCompatActivity {
             public void onClick(View view) {
                 if(adapter.selectedProgram!=null){
                     if(HomeScreen.runningProgram!=null && HomeScreen.runningProgram.getName().equals(adapter.selectedProgram.getName())){
-                        Toast.makeText(ManagePrograms.this, "Program " + HomeScreen.runningProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ManagePrograms.this, HomeScreen.runningProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
                     }else {
                         Intent intent = new Intent(ManagePrograms.this, EditProgram.class);
                         intent.putExtra("PROGRAM", adapter.selectedProgram.getName());
