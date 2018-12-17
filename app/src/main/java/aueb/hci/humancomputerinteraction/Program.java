@@ -1,12 +1,14 @@
 package aueb.hci.humancomputerinteraction;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class Program implements Serializable{
 
     private String name;
     private boolean favorited;
-    private String imagePath;
+    private Bitmap image;
     private String description;
 
     private boolean eco;
@@ -20,7 +22,7 @@ public class Program implements Serializable{
     public Program() {
         this.name = "DEFAULT";
         this.favorited = false;
-        this.imagePath = "NA";
+        this.image = null;
         this.description = "NA";
         this.eco = false;
         this.prewash = false;
@@ -33,7 +35,7 @@ public class Program implements Serializable{
     public Program(Program p){
         this.name = p.name;
         this.favorited = p.favorited;
-        this.imagePath = p.imagePath;
+        this.image = p.image;
         this.description = p.description;
         this.eco = p.eco;
         this.prewash = p.prewash;
@@ -43,10 +45,10 @@ public class Program implements Serializable{
         this.TEMP = p.TEMP;
     }
 
-    public Program(String name, boolean favorited, String imagePath, String description, boolean eco, boolean prewash, boolean dryer, int RPM, int TIME, int TEMP) {
+    public Program(String name, boolean favorited, Bitmap imagePath, String description, boolean eco, boolean prewash, boolean dryer, int RPM, int TIME, int TEMP) {
         this.name = name;
         this.favorited = favorited;
-        this.imagePath = imagePath;
+        this.image = imagePath;
         this.description = description;
         this.eco = eco;
         this.prewash = prewash;
@@ -72,12 +74,12 @@ public class Program implements Serializable{
         this.favorited = favorited;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Bitmap getImage() {
+        return image;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
     public String getDescription() {

@@ -10,8 +10,8 @@
         android:id="@+id/ivAdvancedHeart"
         android:layout_width="34dp"
         android:layout_height="35dp"
-        android:layout_marginStart="58dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="116dp"
         android:src="@drawable/heartico"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +27,7 @@
         android:text="Name:"
         android:textSize="24sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/tvAdvancedFavorites"
+        app:layout_constraintBottom_toTopOf="@+id/tvAdvancedDescription"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -36,13 +36,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="188dp"
+        android:layout_marginBottom="12dp"
         android:ems="10"
         android:enabled="false"
         android:hint="Name"
         android:inputType="textPersonName"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/etAdvancedDescription"
         app:layout_constraintEnd_toStartOf="@+id/tvEditIcon"
         app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toEndOf="@+id/tvAdvancedName" />
@@ -51,8 +51,8 @@
         android:id="@+id/tvAdvancedFavorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginBottom="120dp"
         android:enabled="false"
         android:text="Favorites:"
         android:textSize="24sp"
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="240dp"
         android:enabled="false"
         android:text="Icon:"
         android:textSize="24sp"
@@ -78,12 +78,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="164dp"
-        android:layout_marginBottom="184dp"
+        android:layout_marginBottom="228dp"
         android:enabled="false"
         android:text="select "
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAdvancedDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="172dp"
+        android:layout_marginBottom="28dp"
+        android:text="Description:"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/tvAdvancedFavorites"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etAdvancedDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/ivAdvancedHeart"
+        app:layout_constraintStart_toEndOf="@+id/tvAdvancedDescription" />
 
     <it.beppi.knoblibrary.Knob
         android:id="@+id/knob1Advanced"
@@ -198,7 +223,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="280dp"
+        android:layout_marginBottom="295dp"
         android:text="Add to custom programs"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -211,7 +236,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="280dp"
+        android:layout_marginBottom="295dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAdvancedStart" />
 

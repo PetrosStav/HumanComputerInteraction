@@ -2,6 +2,8 @@ package aueb.hci.humancomputerinteraction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +46,20 @@ public class AdvancedProgram extends AppCompatActivity {
     EditText etTimeAdv = null;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==5){
+            if(data!=null) {
+                final Bundle extras = data.getExtras();
+                if(extras!=null){
+                    Bitmap btm = extras.getParcelable("data");
+                    advProg.setImage(btm);
+                }
+
+            }
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         //super.onBackPressed();
         Intent intent = new Intent();
@@ -56,23 +72,26 @@ public class AdvancedProgram extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_program);
 
-        Knob knob1 = (Knob) findViewById(R.id.knob1Advanced);
-        Knob knob2 = (Knob) findViewById(R.id.knob2Advanced);
-        Knob knob3 = (Knob) findViewById(R.id.knob3Advanced);
+        Knob knob1 = findViewById(R.id.knob1Advanced);
+        Knob knob2 = findViewById(R.id.knob2Advanced);
+        Knob knob3 = findViewById(R.id.knob3Advanced);
 
-        final CheckBox cbCustomPrograms = (CheckBox) findViewById(R.id.cbAdvancedCustomPrograms);
+        CheckBox cbCustomPrograms = findViewById(R.id.cbAdvancedCustomPrograms);
 
-        final TextView tvName = (TextView) findViewById(R.id.tvAdvancedName);
-        final EditText etName = (EditText) findViewById(R.id.etAdvancedName);
-        final TextView tvFavorites = (TextView) findViewById(R.id.tvAdvancedFavorites);
-        final TextView tvIcon = (TextView) findViewById(R.id.tvAdvancedIcon);
+        TextView tvName = findViewById(R.id.tvAdvancedName);
+        EditText etName = findViewById(R.id.etAdvancedName);
+        TextView tvFavorites = findViewById(R.id.tvAdvancedFavorites);
+        TextView tvIcon = findViewById(R.id.tvAdvancedIcon);
+        TextView tvAdvancedDescription = findViewById(R.id.tvAdvancedDescription);
+        EditText etAdvancedDescription = findViewById(R.id.etAdvancedDescription);
+
         etRpmAdv = findViewById(R.id.etRpmAdv);
         etTimeAdv = findViewById(R.id.etTimeAdv);
         etTempAdv = findViewById(R.id.etTempAdv);
-        btnSelectIco = (Button) findViewById(R.id.btnAdvancedSelectIco);
-        btnStart = (Button) findViewById(R.id.btnAdvancedStart);
-        btnCancel = (Button) findViewById(R.id.btnAdvancedCancel);
-        ivHeart = (ImageView) findViewById(R.id.ivAdvancedHeart);
+        btnSelectIco = findViewById(R.id.btnAdvancedSelectIco);
+        btnStart = findViewById(R.id.btnAdvancedStart);
+        btnCancel = findViewById(R.id.btnAdvancedCancel);
+        ivHeart = findViewById(R.id.ivAdvancedHeart);
         tbAdvancedEco = findViewById(R.id.tbAdvancedEco);
         tbAdvancedDryer = findViewById(R.id.tbAdvancedDryer);
         tbAdvancedPrewash = findViewById(R.id.tbAdvancedPrewash);
@@ -154,22 +173,22 @@ public class AdvancedProgram extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(HomeScreen.selectedProgram!=null){
-                    Toast.makeText(AdvancedProgram.this, "Program " + HomeScreen.selectedProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
+                if(HomeScreen.runningProgram!=null){
+                    Toast.makeText(AdvancedProgram.this, "Program " + HomeScreen.runningProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
                 }else {
-                    if (btnStart.getText().toString().equals("Save and Start")) { //TODO IDIOUS ELEGXOUS KAI STHN EDIT ME TA ONOMATA
-                        //TODO FANTAZOMAI DEN XREIAZOMASTE ELEGXOUS GIA DESCRIPTION
+                    if (btnStart.getText().toString().equals("Save and Start")) {
                         if (advProg.getName().equals("Advanced Program") && etName.getText().toString().equals("")) {
 
-                            Toast.makeText(view.getContext(), "Please specify a name for the program!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(view.getContext(), "Please specify a name for the program!", Toast.LENGTH_SHORT).show();
 
                         } else if (programDAO.find(etName.getText().toString()) != null) {
 
-                            Toast.makeText(view.getContext(), "Program name already exists bitch!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(view.getContext(), "Program name already exists!", Toast.LENGTH_SHORT).show();
 
                         } else {
 
                             advProg.setName(etName.getText().toString());
+                            advProg.setDescription(etAdvancedDescription.getText().toString());
                             programDAO.save(advProg);
                             HomeScreen.selectedProgram = advProg;
                             Intent intent = new Intent();
@@ -184,6 +203,22 @@ public class AdvancedProgram extends AppCompatActivity {
                         finish();
                     }
                 }
+            }
+        });
+
+        btnSelectIco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                intent.putExtra("crop", "true");
+                intent.putExtra("scale", true);
+                intent.putExtra("outputX", 136);
+                intent.putExtra("outputY", 119);
+                intent.putExtra("aspectX", 1);
+                intent.putExtra("aspectY", 1);
+                intent.putExtra("return-data", true);
+                startActivityForResult(Intent.createChooser(intent,"Select Icon"),5);
             }
         });
 
@@ -203,6 +238,10 @@ public class AdvancedProgram extends AppCompatActivity {
                     btnSelectIco.setEnabled(true);
                     ivHeart.setVisibility(View.VISIBLE);
                     ivHeart.setEnabled(true);
+                    tvAdvancedDescription.setVisibility(View.VISIBLE);
+                    tvAdvancedDescription.setEnabled(true);
+                    etAdvancedDescription.setVisibility(View.VISIBLE);
+                    etAdvancedDescription.setEnabled(true);
                     btnStart.setText("Save and Start");
 
                     ivHeart.setOnClickListener(new View.OnClickListener() {
@@ -214,7 +253,7 @@ public class AdvancedProgram extends AppCompatActivity {
                             }else{
                                 ((ImageView)view.findViewById(R.id.ivAdvancedHeart)).setImageResource(R.drawable.heartico);
                             }
-                            Toast.makeText(view.getContext(), (advProg.isFavorited()?" Favorited!":" Unfavorited!"), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(view.getContext(), (advProg.isFavorited()?" Favorited!":" Unfavorited!"), Toast.LENGTH_SHORT).show(); //TODO MAYBE NOT SHOW A TOAST?
                         }
                     });
 
@@ -231,6 +270,10 @@ public class AdvancedProgram extends AppCompatActivity {
                     btnSelectIco.setEnabled(false);
                     ivHeart.setVisibility(View.GONE);
                     ivHeart.setEnabled(false);
+                    tvAdvancedDescription.setVisibility(View.GONE);
+                    tvAdvancedDescription.setEnabled(false);
+                    etAdvancedDescription.setVisibility(View.GONE);
+                    etAdvancedDescription.setEnabled(false);
                     btnStart.setText("Start");
                 }
             }

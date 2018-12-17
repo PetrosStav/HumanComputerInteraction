@@ -2,9 +2,12 @@ package aueb.hci.humancomputerinteraction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -58,8 +61,8 @@ public class ManagePrograms extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(adapter.selectedProgram!=null){
-                    if(HomeScreen.selectedProgram!=null && HomeScreen.selectedProgram.getName().equals(adapter.selectedProgram.getName())){
-                        Toast.makeText(ManagePrograms.this, "Program " + HomeScreen.selectedProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
+                    if(HomeScreen.runningProgram!=null && HomeScreen.runningProgram.getName().equals(adapter.selectedProgram.getName())){
+                        Toast.makeText(ManagePrograms.this, "Program " + HomeScreen.runningProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
                     }else {
                         Intent intent = new Intent(ManagePrograms.this, EditProgram.class);
                         intent.putExtra("PROGRAM", adapter.selectedProgram.getName());

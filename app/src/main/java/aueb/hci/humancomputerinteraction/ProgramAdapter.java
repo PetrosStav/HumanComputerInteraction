@@ -72,8 +72,11 @@ public class ProgramAdapter extends BaseAdapter {
 
         if(!what_activity){
 
-            ((ImageView)view.findViewById(R.id.ivClothImgProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
-
+            if(prog.getImage()==null) {
+                ((ImageView) view.findViewById(R.id.ivClothImgProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
+            }else{
+                ((ImageView) view.findViewById(R.id.ivClothImgProgram)).setImageBitmap(prog.getImage());
+            }
             ((TextView) view.findViewById(R.id.tvClothImgName)).setText(prog.getName());
 
             if(prog.isFavorited()){
@@ -120,8 +123,11 @@ public class ProgramAdapter extends BaseAdapter {
 
         }else{
 
-            ((ImageView)view.findViewById(R.id.ivClothImgMngProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
-
+            if(prog.getImage()==null) {
+                ((ImageView) view.findViewById(R.id.ivClothImgMngProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
+            }else{
+                ((ImageView) view.findViewById(R.id.ivClothImgMngProgram)).setImageBitmap(prog.getImage());
+            }
             ((TextView) view.findViewById(R.id.tvClothImgMngName)).setText(prog.getName());
 
             if(prog.isFavorited()){

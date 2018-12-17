@@ -32,6 +32,7 @@ public class HomeScreen extends AppCompatActivity {
     private static boolean initialized = false;
     ProgramDAO programdao = new ProgramDAOmemory();
     static Program selectedProgram = null;
+    static Program runningProgram = null;
 
     TextView tvProgram = null;
     TextView tvTimeRemaining = null;
@@ -42,24 +43,282 @@ public class HomeScreen extends AppCompatActivity {
     ValueAnimator animatorSpecial = null;
     ValueAnimator animatorTimeSpecial = null;
 
-    ImageView ivCircleWasher, ivCircleDryer, ivCirclePrewasher; // TODO NA TA GEMIZOUME ME XRWMA OPOTE TREXEI KATI
+    ImageView ivCircleWasher, ivCircleDryer, ivCirclePrewasher;
     Button start = null;
+
+    ImageView ivHomeMic, ivHomeSpeaker, ivHomeNotification;
 
     private boolean animCanceled = false;
     private boolean animSpecialCanceled = false;
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
-            case 3:case 2:
-                programData = programdao.findAll();
-                adapter.loadData(programData);
-                if(resultCode == Activity.RESULT_OK){
+    private boolean micEnabled = true;
+    private boolean speakerEnabled = true;
+    private boolean notificationsEnabled = true;
 
-                    if(selectedProgram.isPrewash()){
-                        tvProgram.setText("Program: " + selectedProgram.getName()+ " - Prewash");
+    private void programRunHelper(){
 
-                        // Start the Prewash
+        // Clear the list adapter selection
+        adapter.selectedProgram = null;
+        if(adapter.previousView!=null) adapter.previousView.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
+        adapter.previousView = null;
+
+        runningProgram = selectedProgram;
+
+        selectedProgram = null;
+
+        if(runningProgram.isPrewash()){
+            tvProgram.setText("Program: " + runningProgram.getName()+ " - Prewash");
+
+            // Start the Prewash
+            animatorSpecial = ValueAnimator.ofInt(0, progressBar.getMax());
+            animatorSpecial.setInterpolator(new LinearInterpolator());
+            animatorSpecial.setDuration(10*1000); // 10 mins for the dryer
+            animatorSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
+                }
+            });
+
+            animatorSpecial.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    super.onAnimationCancel(animation);
+                    Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Prewash was cancelled!", Toast.LENGTH_LONG).show();
+                    animSpecialCanceled = true;
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation, boolean isReverse) {
+                    super.onAnimationEnd(animation);
+                    start.setText("Start");
+                    ivCirclePrewasher.setImageResource(R.drawable.circle);
+                    if(animSpecialCanceled){
+                        animSpecialCanceled=false;
+                        return;
+                    }
+                    Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Prewash has finished!", Toast.LENGTH_LONG).show();
+
+                    // Start program
+                    tvProgram.setText("Program: " + runningProgram.getName());
+
+                    animator = ValueAnimator.ofInt(0, progressBar.getMax());
+                    animator.setInterpolator(new LinearInterpolator());
+                    animator.setDuration(runningProgram.getTIME()*1000);
+                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
+                        }
+                    });
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            // start your activity here
+                            start.setText("Start");
+                            ivCircleWasher.setImageResource(R.drawable.circle);
+                            if(animCanceled) {
+                                animCanceled = false;
+                                return;
+                            }
+                            Toast.makeText(HomeScreen.this, "Program: " + runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
+
+                            if(runningProgram.isDryer()){
+
+                                tvProgram.setText("Program: " + runningProgram.getName()+ " - Dryer");
+
+                                // Start the Dryer
+                                animatorSpecial = ValueAnimator.ofInt(0, progressBar.getMax());
+                                animatorSpecial.setInterpolator(new LinearInterpolator());
+                                animatorSpecial.setDuration(10*1000); // 10 mins for the dryer
+                                animatorSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                                    @Override
+                                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                        progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
+                                    }
+                                });
+
+                                animatorSpecial.addListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationCancel(Animator animation) {
+                                        super.onAnimationCancel(animation);
+                                        Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer was cancelled!", Toast.LENGTH_LONG).show();
+                                        animSpecialCanceled = true;
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animator animation, boolean isReverse) {
+                                        super.onAnimationEnd(animation);
+                                        start.setText("Start");
+                                        ivCircleDryer.setImageResource(R.drawable.circle);
+                                        if(animSpecialCanceled){
+                                            animSpecialCanceled=false;
+                                            return;
+                                        }
+                                        Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer has finished!", Toast.LENGTH_LONG).show();
+                                        runningProgram = null;
+                                    }
+                                });
+
+                                animatorTimeSpecial = ValueAnimator.ofInt(10,0);
+                                animatorTimeSpecial.setInterpolator(new LinearInterpolator());
+                                animatorTimeSpecial.setDuration(10*1000);
+                                animatorTimeSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                                    @Override
+                                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                        tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
+                                    }
+                                });
+
+                                animatorTimeSpecial.addListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationCancel(Animator animation) {
+                                        super.onAnimationCancel(animation);
+                                        tvProgram.setText("Program: ");
+                                        tvTimeRemaining.setText("Time Remaining: ");
+                                        animSpecialCanceled = true;
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        super.onAnimationEnd(animation);
+                                        if(animSpecialCanceled) {
+                                            animSpecialCanceled = false;
+                                            return;
+                                        }
+                                        tvTimeRemaining.setText("Time Remaining: Finished!");
+                                    }
+                                });
+
+                                start.setText("Stop");
+
+                                ivCircleDryer.setImageResource(R.drawable.circlered);
+
+                                animatorSpecial.start();
+                                animatorTimeSpecial.start();
+
+                            }else {
+                                runningProgram = null;
+                            }
+
+                        }
+                    });
+
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                            super.onAnimationCancel(animation);
+                            Toast.makeText(HomeScreen.this, "Program: " + runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
+                            runningProgram = null;
+                            animCanceled = true;
+                        }
+                    });
+
+                    animatorTime = ValueAnimator.ofInt(runningProgram.getTIME(),0);
+                    animatorTime.setInterpolator(new LinearInterpolator());
+                    animatorTime.setDuration(runningProgram.getTIME()*1000);
+                    animatorTime.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
+                        }
+                    });
+                    animatorTime.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            if(animCanceled) {
+                                animCanceled = false;
+                                return;
+                            }
+//                            tvProgram.setText("Program: ");
+                            tvTimeRemaining.setText("Time Remaining: Finished!");
+                        }
+                    });
+
+                    animatorTime.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                            super.onAnimationCancel(animation);
+                            tvProgram.setText("Program: ");
+                            tvTimeRemaining.setText("Time Remaining: ");
+                            animCanceled = true;
+                        }
+                    });
+
+                    start.setText("Stop");
+
+                    ivCircleWasher.setImageResource(R.drawable.circlered);
+
+                    animator.start();
+                    animatorTime.start();
+
+                }
+            });
+
+            animatorTimeSpecial = ValueAnimator.ofInt(10,0);
+            animatorTimeSpecial.setInterpolator(new LinearInterpolator());
+            animatorTimeSpecial.setDuration(10*1000);
+            animatorTimeSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
+                }
+            });
+
+            animatorTimeSpecial.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    super.onAnimationCancel(animation);
+                    tvProgram.setText("Program: ");
+                    tvTimeRemaining.setText("Time Remaining: ");
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+
+                }
+            });
+
+            start.setText("Stop");
+
+            ivCirclePrewasher.setImageResource(R.drawable.circlered);
+
+            animatorSpecial.start();
+            animatorTimeSpecial.start();
+        }else{ // No Prewash
+
+            tvProgram.setText("Program: " + runningProgram.getName());
+
+            animator = ValueAnimator.ofInt(0, progressBar.getMax());
+            animator.setInterpolator(new LinearInterpolator());
+            animator.setDuration(runningProgram.getTIME()*1000);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
+                }
+            });
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    // start your activity here
+                    start.setText("Start");
+                    ivCircleWasher.setImageResource(R.drawable.circle);
+                    if(animCanceled) {
+                        animCanceled = false;
+                        return;
+                    }
+                    Toast.makeText(HomeScreen.this, "Program: " + runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
+
+                    if(runningProgram.isDryer()){
+
+                        tvProgram.setText("Program: " + runningProgram.getName()+ " - Dryer");
+
+                        // Start the Dryer
                         animatorSpecial = ValueAnimator.ofInt(0, progressBar.getMax());
                         animatorSpecial.setInterpolator(new LinearInterpolator());
                         animatorSpecial.setDuration(10*1000); // 10 mins for the dryer
@@ -74,7 +333,7 @@ public class HomeScreen extends AppCompatActivity {
                             @Override
                             public void onAnimationCancel(Animator animation) {
                                 super.onAnimationCancel(animation);
-                                Toast.makeText(HomeScreen.this, selectedProgram.getName()+" - Prewash was cancelled!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer was cancelled!", Toast.LENGTH_LONG).show();
                                 animSpecialCanceled = true;
                             }
 
@@ -82,168 +341,13 @@ public class HomeScreen extends AppCompatActivity {
                             public void onAnimationEnd(Animator animation, boolean isReverse) {
                                 super.onAnimationEnd(animation);
                                 start.setText("Start");
-                                ivCirclePrewasher.setImageResource(R.drawable.circle);
+                                ivCircleDryer.setImageResource(R.drawable.circle);
                                 if(animSpecialCanceled){
                                     animSpecialCanceled=false;
                                     return;
                                 }
-                                Toast.makeText(HomeScreen.this, selectedProgram.getName()+" - Prewash has finished!", Toast.LENGTH_LONG).show();
-
-                                // Start program
-                                tvProgram.setText("Program: " + selectedProgram.getName());
-
-                                animator = ValueAnimator.ofInt(0, progressBar.getMax());
-                                animator.setInterpolator(new LinearInterpolator());
-                                animator.setDuration(selectedProgram.getTIME()*1000);
-                                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                    @Override
-                                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                        progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
-                                    }
-                                });
-                                animator.addListener(new AnimatorListenerAdapter() {
-                                    @Override
-                                    public void onAnimationEnd(Animator animation) {
-                                        super.onAnimationEnd(animation);
-                                        // start your activity here
-                                        start.setText("Start");
-                                        ivCircleWasher.setImageResource(R.drawable.circle);
-                                        if(animCanceled) {
-                                            animCanceled = false;
-                                            return;
-                                        }
-                                        Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
-
-                                        if(selectedProgram.isDryer()){
-
-                                            tvProgram.setText("Program: " + selectedProgram.getName()+ " - Dryer");
-
-                                            // Start the Dryer
-                                            animatorSpecial = ValueAnimator.ofInt(0, progressBar.getMax());
-                                            animatorSpecial.setInterpolator(new LinearInterpolator());
-                                            animatorSpecial.setDuration(10*1000); // 10 mins for the dryer
-                                            animatorSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                                @Override
-                                                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                                    progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
-                                                }
-                                            });
-
-                                            animatorSpecial.addListener(new AnimatorListenerAdapter() {
-                                                @Override
-                                                public void onAnimationCancel(Animator animation) {
-                                                    super.onAnimationCancel(animation);
-                                                    Toast.makeText(HomeScreen.this, selectedProgram.getName()+" - Dryer was cancelled!", Toast.LENGTH_LONG).show();
-                                                    animSpecialCanceled = true;
-                                                }
-
-                                                @Override
-                                                public void onAnimationEnd(Animator animation, boolean isReverse) {
-                                                    super.onAnimationEnd(animation);
-                                                    start.setText("Start");
-                                                    ivCircleDryer.setImageResource(R.drawable.circle);
-                                                    if(animSpecialCanceled){
-                                                        animSpecialCanceled=false;
-                                                        return;
-                                                    }
-                                                    Toast.makeText(HomeScreen.this, selectedProgram.getName()+" - Dryer has finished!", Toast.LENGTH_LONG).show();
-                                                    selectedProgram = null;
-                                                }
-                                            });
-
-                                            animatorTimeSpecial = ValueAnimator.ofInt(10,0);
-                                            animatorTimeSpecial.setInterpolator(new LinearInterpolator());
-                                            animatorTimeSpecial.setDuration(10*1000);
-                                            animatorTimeSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                                @Override
-                                                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                                    tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
-                                                }
-                                            });
-
-                                            animatorTimeSpecial.addListener(new AnimatorListenerAdapter() {
-                                                @Override
-                                                public void onAnimationCancel(Animator animation) {
-                                                    super.onAnimationCancel(animation);
-                                                    tvProgram.setText("Program: ");
-                                                    tvTimeRemaining.setText("Time Remaining: ");
-                                                    animSpecialCanceled = true;
-                                                }
-
-                                                @Override
-                                                public void onAnimationEnd(Animator animation) {
-                                                    super.onAnimationEnd(animation);
-                                                    if(animSpecialCanceled) {
-                                                        animSpecialCanceled = false;
-                                                        return;
-                                                    }
-                                                    tvTimeRemaining.setText("Time Remaining: Finished!");
-                                                }
-                                            });
-
-                                            start.setText("Stop");
-
-                                            ivCircleDryer.setImageResource(R.drawable.circlered);
-
-                                            animatorSpecial.start();
-                                            animatorTimeSpecial.start();
-
-                                        }else {
-                                            selectedProgram = null;
-                                        }
-
-                                    }
-                                });
-
-                                animator.addListener(new AnimatorListenerAdapter() {
-                                    @Override
-                                    public void onAnimationCancel(Animator animation) {
-                                        super.onAnimationCancel(animation);
-                                        Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
-                                        selectedProgram = null;
-                                        animCanceled = true;
-                                    }
-                                });
-
-                                animatorTime = ValueAnimator.ofInt(selectedProgram.getTIME(),0);
-                                animatorTime.setInterpolator(new LinearInterpolator());
-                                animatorTime.setDuration(selectedProgram.getTIME()*1000);
-                                animatorTime.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                    @Override
-                                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                        tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
-                                    }
-                                });
-                                animatorTime.addListener(new AnimatorListenerAdapter() {
-                                    @Override
-                                    public void onAnimationEnd(Animator animation) {
-                                        super.onAnimationEnd(animation);
-                                        if(animCanceled) {
-                                            animCanceled = false;
-                                            return;
-                                        }
-//                            tvProgram.setText("Program: ");
-                                        tvTimeRemaining.setText("Time Remaining: Finished!");
-                                    }
-                                });
-
-                                animatorTime.addListener(new AnimatorListenerAdapter() {
-                                    @Override
-                                    public void onAnimationCancel(Animator animation) {
-                                        super.onAnimationCancel(animation);
-                                        tvProgram.setText("Program: ");
-                                        tvTimeRemaining.setText("Time Remaining: ");
-                                        animCanceled = true;
-                                    }
-                                });
-
-                                start.setText("Stop");
-
-                                ivCircleWasher.setImageResource(R.drawable.circlered);
-
-                                animator.start();
-                                animatorTime.start();
-
+                                Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer has finished!", Toast.LENGTH_LONG).show();
+                                runningProgram = null;
                             }
                         });
 
@@ -263,180 +367,95 @@ public class HomeScreen extends AppCompatActivity {
                                 super.onAnimationCancel(animation);
                                 tvProgram.setText("Program: ");
                                 tvTimeRemaining.setText("Time Remaining: ");
+                                animSpecialCanceled = true;
                             }
 
                             @Override
                             public void onAnimationEnd(Animator animation) {
                                 super.onAnimationEnd(animation);
-
-                            }
-                        });
-
-                        start.setText("Stop");
-
-                        ivCirclePrewasher.setImageResource(R.drawable.circlered);
-
-                        animatorSpecial.start();
-                        animatorTimeSpecial.start();
-                    }else{ // No Prewash
-
-                        tvProgram.setText("Program: " + selectedProgram.getName());
-
-                        animator = ValueAnimator.ofInt(0, progressBar.getMax());
-                        animator.setInterpolator(new LinearInterpolator());
-                        animator.setDuration(selectedProgram.getTIME()*1000);
-                        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                            @Override
-                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
-                            }
-                        });
-                        animator.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                // start your activity here
-                                start.setText("Start");
-                                ivCircleWasher.setImageResource(R.drawable.circle);
-                                if(animCanceled) {
-                                    animCanceled = false;
+                                if(animSpecialCanceled) {
+                                    animSpecialCanceled = false;
                                     return;
                                 }
-                                Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
-
-                                if(selectedProgram.isDryer()){
-
-                                    tvProgram.setText("Program: " + selectedProgram.getName()+ " - Dryer");
-
-                                    // Start the Dryer
-                                    animatorSpecial = ValueAnimator.ofInt(0, progressBar.getMax());
-                                    animatorSpecial.setInterpolator(new LinearInterpolator());
-                                    animatorSpecial.setDuration(10*1000); // 10 mins for the dryer
-                                    animatorSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                        @Override
-                                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                            progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
-                                        }
-                                    });
-
-                                    animatorSpecial.addListener(new AnimatorListenerAdapter() {
-                                        @Override
-                                        public void onAnimationCancel(Animator animation) {
-                                            super.onAnimationCancel(animation);
-                                            Toast.makeText(HomeScreen.this, selectedProgram.getName()+" - Dryer was cancelled!", Toast.LENGTH_LONG).show();
-                                            animSpecialCanceled = true;
-                                        }
-
-                                        @Override
-                                        public void onAnimationEnd(Animator animation, boolean isReverse) {
-                                            super.onAnimationEnd(animation);
-                                            start.setText("Start");
-                                            ivCircleDryer.setImageResource(R.drawable.circle);
-                                            if(animSpecialCanceled){
-                                                animSpecialCanceled=false;
-                                                return;
-                                            }
-                                            Toast.makeText(HomeScreen.this, selectedProgram.getName()+" - Dryer has finished!", Toast.LENGTH_LONG).show();
-                                            selectedProgram = null;
-                                        }
-                                    });
-
-                                    animatorTimeSpecial = ValueAnimator.ofInt(10,0);
-                                    animatorTimeSpecial.setInterpolator(new LinearInterpolator());
-                                    animatorTimeSpecial.setDuration(10*1000);
-                                    animatorTimeSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                        @Override
-                                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                            tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
-                                        }
-                                    });
-
-                                    animatorTimeSpecial.addListener(new AnimatorListenerAdapter() {
-                                        @Override
-                                        public void onAnimationCancel(Animator animation) {
-                                            super.onAnimationCancel(animation);
-                                            tvProgram.setText("Program: ");
-                                            tvTimeRemaining.setText("Time Remaining: ");
-                                            animSpecialCanceled = true;
-                                        }
-
-                                        @Override
-                                        public void onAnimationEnd(Animator animation) {
-                                            super.onAnimationEnd(animation);
-                                            if(animSpecialCanceled) {
-                                                animSpecialCanceled = false;
-                                                return;
-                                            }
-                                            tvTimeRemaining.setText("Time Remaining: Finished!");
-                                        }
-                                    });
-
-                                    start.setText("Stop");
-
-                                    ivCircleDryer.setImageResource(R.drawable.circlered);
-
-                                    animatorSpecial.start();
-                                    animatorTimeSpecial.start();
-
-                                }else {
-                                    selectedProgram = null;
-                                }
-
-                            }
-                        });
-
-                        animator.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationCancel(Animator animation) {
-                                super.onAnimationCancel(animation);
-                                Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
-                                selectedProgram = null;
-                                animCanceled = true;
-                            }
-                        });
-
-                        animatorTime = ValueAnimator.ofInt(selectedProgram.getTIME(),0);
-                        animatorTime.setInterpolator(new LinearInterpolator());
-                        animatorTime.setDuration(selectedProgram.getTIME()*1000);
-                        animatorTime.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                            @Override
-                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
-                            }
-                        });
-                        animatorTime.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                if(animCanceled) {
-                                    animCanceled = false;
-                                    return;
-                                }
-//                            tvProgram.setText("Program: ");
                                 tvTimeRemaining.setText("Time Remaining: Finished!");
                             }
                         });
 
-                        animatorTime.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationCancel(Animator animation) {
-                                super.onAnimationCancel(animation);
-                                tvProgram.setText("Program: ");
-                                tvTimeRemaining.setText("Time Remaining: ");
-                                animCanceled = true;
-                            }
-                        });
-
                         start.setText("Stop");
 
-                        ivCircleWasher.setImageResource(R.drawable.circlered);
+                        ivCircleDryer.setImageResource(R.drawable.circlered);
 
-                        animator.start();
-                        animatorTime.start();
+                        animatorSpecial.start();
+                        animatorTimeSpecial.start();
 
+                    }else {
+                        runningProgram = null;
                     }
 
+                }
+            });
 
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    super.onAnimationCancel(animation);
+                    Toast.makeText(HomeScreen.this, "Program: " + runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
+                    runningProgram = null;
+                    animCanceled = true;
+                }
+            });
+
+            animatorTime = ValueAnimator.ofInt(runningProgram.getTIME(),0);
+            animatorTime.setInterpolator(new LinearInterpolator());
+            animatorTime.setDuration(runningProgram.getTIME()*1000);
+            animatorTime.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
+                }
+            });
+            animatorTime.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    if(animCanceled) {
+                        animCanceled = false;
+                        return;
+                    }
+//                            tvProgram.setText("Program: ");
+                    tvTimeRemaining.setText("Time Remaining: Finished!");
+                }
+            });
+
+            animatorTime.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    super.onAnimationCancel(animation);
+                    tvProgram.setText("Program: ");
+                    tvTimeRemaining.setText("Time Remaining: ");
+                    animCanceled = true;
+                }
+            });
+
+            start.setText("Stop");
+
+            ivCircleWasher.setImageResource(R.drawable.circlered);
+
+            animator.start();
+            animatorTime.start();
+
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 3:case 2:
+                programData = programdao.findAll();
+                adapter.loadData(programData);
+                if(resultCode == Activity.RESULT_OK){
+                    programRunHelper();
                 }
                 break;
             case 1:default:
@@ -467,6 +486,10 @@ public class HomeScreen extends AppCompatActivity {
 
         tvProgram = findViewById(R.id.tvProgram);
         tvTimeRemaining = findViewById(R.id.tvTimeRemaining);
+
+        ivHomeMic = findViewById(R.id.ivHomeMic);
+        ivHomeSpeaker = findViewById(R.id.ivHomeSpeaker);
+        ivHomeNotification = findViewById(R.id.ivHomeNotification);
 
         if(!initialized){
             new DataInitializer().prepareData();
@@ -512,161 +535,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 if(start.getText().toString().equals("Start")){
                     if(selectedProgram != null){
-                        tvProgram.setText("Program: " + selectedProgram.getName());
-                        animator = ValueAnimator.ofInt(0, progressBar.getMax());
-                        animator.setInterpolator(new LinearInterpolator());
-                        animator.setDuration(selectedProgram.getTIME()*1000);
-                        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                            @Override
-                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
-                            }
-                        });
-                        animator.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                // start your activity here
-                                start.setText("Start");
-                                ivCircleWasher.setImageResource(R.drawable.circle);
-                                if(animCanceled) {
-                                    animCanceled = false;
-                                    return;
-                                }
-                                Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
-                                if(selectedProgram.isDryer()){
-
-                                    tvProgram.setText("Program: " + selectedProgram.getName()+ " - Dryer");
-
-                                    // Start the Dryer
-                                    animatorSpecial = ValueAnimator.ofInt(0, progressBar.getMax());
-                                    animatorSpecial.setInterpolator(new LinearInterpolator());
-                                    animatorSpecial.setDuration(10*1000); // 10 mins for the dryer
-                                    animatorSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                        @Override
-                                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                            progressBar.setProgress((Integer) valueAnimator.getAnimatedValue());
-                                        }
-                                    });
-
-                                    animatorSpecial.addListener(new AnimatorListenerAdapter() {
-                                        @Override
-                                        public void onAnimationCancel(Animator animation) {
-                                            super.onAnimationCancel(animation);
-                                            Toast.makeText(HomeScreen.this, selectedProgram.getName()+" - Dryer was cancelled!", Toast.LENGTH_LONG).show();
-                                            animSpecialCanceled = true;
-                                        }
-
-                                        @Override
-                                        public void onAnimationEnd(Animator animation, boolean isReverse) {
-                                            super.onAnimationEnd(animation);
-                                            start.setText("Start");
-                                            ivCircleDryer.setImageResource(R.drawable.circle);
-                                            if(animSpecialCanceled){
-                                                animSpecialCanceled=false;
-                                                return;
-                                            }
-                                            Toast.makeText(HomeScreen.this, selectedProgram.getName()+" - Dryer has finished!", Toast.LENGTH_LONG).show();
-                                            selectedProgram = null;
-                                        }
-                                    });
-
-                                    animatorTimeSpecial = ValueAnimator.ofInt(10,0);
-                                    animatorTimeSpecial.setInterpolator(new LinearInterpolator());
-                                    animatorTimeSpecial.setDuration(10*1000);
-                                    animatorTimeSpecial.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                        @Override
-                                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                            tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
-                                        }
-                                    });
-
-                                    animatorTimeSpecial.addListener(new AnimatorListenerAdapter() {
-                                        @Override
-                                        public void onAnimationCancel(Animator animation) {
-                                            super.onAnimationCancel(animation);
-                                            tvProgram.setText("Program: ");
-                                            tvTimeRemaining.setText("Time Remaining: ");
-                                            animSpecialCanceled = true;
-                                        }
-
-                                        @Override
-                                        public void onAnimationEnd(Animator animation) {
-                                            super.onAnimationEnd(animation);
-                                            if(animSpecialCanceled) {
-                                                animSpecialCanceled = false;
-                                                return;
-                                            }
-                                            tvTimeRemaining.setText("Time Remaining: Finished!");
-                                        }
-                                    });
-
-                                    start.setText("Stop");
-
-                                    ivCircleDryer.setImageResource(R.drawable.circlered);
-
-                                    animatorSpecial.start();
-                                    animatorTimeSpecial.start();
-
-                                }else {
-                                    selectedProgram = null;
-                                }
-                            }
-                        });
-
-                        animator.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationCancel(Animator animation) {
-                                super.onAnimationCancel(animation);
-                                Toast.makeText(HomeScreen.this, "Program: " + selectedProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
-                                selectedProgram = null;
-                                animCanceled = true;
-                            }
-                        });
-
-                        animatorTime = ValueAnimator.ofInt(selectedProgram.getTIME(),0);
-                        animatorTime.setInterpolator(new LinearInterpolator());
-                        animatorTime.setDuration(selectedProgram.getTIME()*1000);
-                        animatorTime.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                            @Override
-                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                tvTimeRemaining.setText("Time Remaining: " + valueAnimator.getAnimatedValue() + " sec");
-                            }
-                        });
-                        animatorTime.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                if(animCanceled) {
-                                    animCanceled = false;
-                                    return;
-                                }
-//                            tvProgram.setText("Program: ");
-                                tvTimeRemaining.setText("Time Remaining: Finished!");
-                            }
-                        });
-
-                        animatorTime.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationCancel(Animator animation) {
-                                super.onAnimationCancel(animation);
-                                tvProgram.setText("Program: ");
-                                tvTimeRemaining.setText("Time Remaining: ");
-                                animCanceled = true;
-                            }
-                        });
-
-                        start.setText("Stop");
-
-                        // Clear the list adapter selection
-                        adapter.selectedProgram = null;
-                        adapter.previousView.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
-                        adapter.previousView = null;
-
-                        ivCircleWasher.setImageResource(R.drawable.circlered);
-
-                        animator.start();
-                        animatorTime.start();
+                        programRunHelper();
                     }else{
                         Toast.makeText(HomeScreen.this, "Choose a favorite program to start!", Toast.LENGTH_LONG).show();
                     }
@@ -682,12 +551,49 @@ public class HomeScreen extends AppCompatActivity {
                     progressBar.setProgress(0);
                     // TODO IF WE WANT ADD PAUSE
                     start.setText("Start");
-                    selectedProgram = null;
+                    runningProgram = null;
                 }
 
 
             }
         });
+
+        ivHomeMic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                micEnabled = !micEnabled;
+                if(micEnabled){
+                    ivHomeMic.setImageResource(R.drawable.micnot);
+                }else{
+                    ivHomeMic.setImageResource(R.drawable.mic);
+                }
+            }
+        });
+
+        ivHomeSpeaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                speakerEnabled = !speakerEnabled;
+                if(speakerEnabled){
+                    ivHomeSpeaker.setImageResource(R.drawable.speaknot);
+                }else{
+                    ivHomeSpeaker.setImageResource(R.drawable.speak);
+                }
+            }
+        });
+
+        ivHomeNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notificationsEnabled = !notificationsEnabled;
+                if(notificationsEnabled){
+                    ivHomeNotification.setImageResource(R.drawable.notifynot);
+                }else{
+                    ivHomeNotification.setImageResource(R.drawable.notify);
+                }
+            }
+        });
+
     }
 
 

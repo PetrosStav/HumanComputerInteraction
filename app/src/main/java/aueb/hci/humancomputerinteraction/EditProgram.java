@@ -2,7 +2,8 @@ package aueb.hci.humancomputerinteraction;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.Image;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,6 +22,7 @@ public class EditProgram extends AppCompatActivity {
 
     Button btnEditCancel = null;
     Button btnEditSave = null;
+    Button btnEditSelectIco = null;
     ToggleButton tbEco = null;
     ToggleButton tbDryer = null;
     ToggleButton tbPrewash = null;
@@ -43,6 +44,21 @@ public class EditProgram extends AppCompatActivity {
     EditText etTime = null;
     EditText etEditDescription = null;
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==5){
+            if(data!=null) {
+                final Bundle extras = data.getExtras();
+                if(extras!=null){
+                    Bitmap btm = extras.getParcelable("data");
+                    newProgram.setImage(btm);
+                }
+
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +75,7 @@ public class EditProgram extends AppCompatActivity {
         etTemp = findViewById(R.id.etTemp);
         btnEditCancel = findViewById(R.id.btnEditCancel);
         btnEditSave = findViewById(R.id.btnEditSave);
+        btnEditSelectIco = findViewById(R.id.btnEditSelectIco);
 
         tbEco = findViewById(R.id.tbEditEco);
         tbDryer = findViewById(R.id.tbEditDryer);
@@ -170,7 +187,7 @@ public class EditProgram extends AppCompatActivity {
 
                 selectedProgram.setName(etName.getText().toString());
                 selectedProgram.setDescription(etEditDescription.getText().toString());
-                selectedProgram.setImagePath(newProgram.getImagePath());
+                selectedProgram.setImage(newProgram.getImage());
 
                 selectedProgram.setEco(newProgram.isEco());
                 selectedProgram.setDryer(newProgram.isDryer());
@@ -179,6 +196,22 @@ public class EditProgram extends AppCompatActivity {
                 Intent intent = new Intent();
                 setResult(Activity.RESULT_OK,intent);
                 finish();
+            }
+        });
+
+        btnEditSelectIco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                intent.putExtra("crop", "true");
+                intent.putExtra("scale", true);
+                intent.putExtra("outputX", 136);
+                intent.putExtra("outputY", 119);
+                intent.putExtra("aspectX", 1);
+                intent.putExtra("aspectY", 1);
+                intent.putExtra("return-data", true);
+                startActivityForResult(Intent.createChooser(intent,"Select Icon"),5);
             }
         });
 
