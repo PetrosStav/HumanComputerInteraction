@@ -20,4 +20,19 @@
     <string name="go_back">Go Back</string>
     <string name="edit_message">Click on a Program to Edit!!</string>
     <string name="undo">Undo Previous Action</string>
+    <string name="rpm_info">RPM:</string>
+    <string name="temp_info">TEMP:</string>
+    <string name="time_info">TIME:</string>
+    <string name="eco_info">ECO:</string>
+    <string name="prewash_info">Prewash:</string>
+    <string name="ok_info">OK</string>
+    <string name="description_info">Description:</string>
+    <string name="description">This program has no description</string>
+    <string name="eco_bool">No</string>
+    <string name="prewash_bool">No</string>
+    <string name="dryer_bool">No</string>
+    <string name="rpm_bool">400</string>
+    <string name="temp_bool">20</string>
+    <string name="time_bool">20</string>
+    <string name="dryer_info">Dryer:</string>
 </resources>

@@ -41,6 +41,10 @@
             android:name=".ManagePrograms"
             android:label="Here you can manage your programs."
             android:screenOrientation="reverseLandscape" />
+        <activity
+            android:name=".InfoProgram"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
     </application>
 
 </manifest>

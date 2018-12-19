@@ -3,6 +3,7 @@ package aueb.hci.humancomputerinteraction;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,12 @@ public class ProgramAdapter extends BaseAdapter {
     private List<Program> dataList, copyOfData;
     private LayoutInflater inflater;
     private Boolean what_activity;
+//    private Boolean info_pressed = false;
+//
+//
+//    public Boolean getInfo_pressed() {
+//        return info_pressed;
+//    }
 
     public Program selectedProgram;
 
@@ -88,7 +95,9 @@ public class ProgramAdapter extends BaseAdapter {
             ((ImageView)view.findViewById(R.id.ClothImgInfo)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), prog.getDescription(), Toast.LENGTH_LONG).show();
+                    InfoProgram.info_program = prog;
+                    Intent intent = new Intent(context, InfoProgram.class);
+                    context.startActivity(intent);
                 }
             });
 

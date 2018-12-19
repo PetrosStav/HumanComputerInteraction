@@ -1,6 +1,7 @@
 package aueb.hci.humancomputerinteraction;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import java.io.Serializable;
 
@@ -27,6 +28,7 @@ public class Program implements Serializable{
         this.eco = false;
         this.prewash = false;
         this.dryer = false;
+        this.image = BitmapFactory.decodeFile("drawable/shirt_cartoon_deault.png");
         this.RPM = 400;
         this.TIME = 20;
         this.TEMP = 20;

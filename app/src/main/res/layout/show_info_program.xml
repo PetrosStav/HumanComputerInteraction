@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginBottom="98dp"
+        android:background="@drawable/text_background"
+        android:text="@string/description"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/description_info" />
+
+    <TextView
+        android:id="@+id/dryer_bool"
+        android:layout_width="63dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginBottom="172dp"
+        android:background="@drawable/text_background"
+        android:text="@string/dryer_bool"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dryer_info" />
+
+    <TextView
+        android:id="@+id/prewash_bool"
+        android:layout_width="63dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="166dp"
+        android:layout_marginBottom="172dp"
+        android:background="@drawable/text_background"
+        android:text="@string/prewash_bool"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/prewash_info"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/eco_bool"
+        android:layout_width="63dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="175dp"
+        android:background="@drawable/text_background"
+        android:text="@string/eco_bool"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eco_info"
+        app:layout_constraintTop_toBottomOf="@+id/times"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/times"
+        android:layout_width="63dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/text_background"
+        android:text="@string/time_bool"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/time_bool"
+        app:layout_constraintTop_toBottomOf="@+id/temps" />
+
+    <ImageView
+        android:id="@+id/program_image"
+        android:layout_width="207dp"
+        android:layout_height="136dp"
+        android:layout_marginStart="328dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026"
+        app:srcCompat="@drawable/shirt_cartoon_deault" />
+
+    <TextView
+        android:id="@+id/rpm_bool"
+        android:layout_width="89dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/rpm_info"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/temp_bool"
+        android:layout_width="89dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
+        android:text="@string/temp_info"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rpm_bool" />
+
+    <TextView
+        android:id="@+id/time_bool"
+        android:layout_width="89dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
+        android:text="@string/time_info"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temp_bool" />
+
+    <Button
+        android:id="@+id/ok_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="288dp"
+        android:layout_marginEnd="231dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/ok_info"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/eco_info"
+        android:layout_width="89dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="23dp"
+        android:text="@string/eco_info"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time_bool" />
+
+    <TextView
+        android:id="@+id/prewash_info"
+        android:layout_width="94dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="168dp"
+        android:text="@string/prewash_info"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/eco_info"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dryer_info"
+        android:layout_width="84dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginBottom="172dp"
+        android:text="@string/dryer_info"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/prewash_info" />
+
+    <TextView
+        android:id="@+id/description_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="49dp"
+        android:text="@string/description_info"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eco_info" />
+
+    <TextView
+        android:id="@+id/rpms"
+        android:layout_width="63dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/text_background"
+        android:text="@string/rpm_bool"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/rpm_bool"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/temps"
+        android:layout_width="63dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/text_background"
+        android:text="@string/temp_bool"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/temp_bool"
+        app:layout_constraintTop_toBottomOf="@+id/rpms" />
+</android.support.constraint.ConstraintLayout>
