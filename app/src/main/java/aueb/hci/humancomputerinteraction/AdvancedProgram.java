@@ -84,6 +84,7 @@ public class AdvancedProgram extends AppCompatActivity {
         TextView tvIcon = findViewById(R.id.tvAdvancedIcon);
         TextView tvAdvancedDescription = findViewById(R.id.tvAdvancedDescription);
         EditText etAdvancedDescription = findViewById(R.id.etAdvancedDescription);
+        ImageView info = findViewById(R.id.ivAdvancedInfo);
 
         etRpmAdv = findViewById(R.id.etRpmAdv);
         etTimeAdv = findViewById(R.id.etTimeAdv);
@@ -276,6 +277,15 @@ public class AdvancedProgram extends AppCompatActivity {
                     etAdvancedDescription.setEnabled(false);
                     btnStart.setText("Start");
                 }
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InfoScreen.textId = 1;
+                Intent intent = new Intent(AdvancedProgram.this, InfoScreen.class);
+                startActivity(intent);
             }
         });
 

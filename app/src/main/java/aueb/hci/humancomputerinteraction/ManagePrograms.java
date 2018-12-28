@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -39,6 +40,8 @@ public class ManagePrograms extends AppCompatActivity {
         Button goback = findViewById(R.id.btnManageGoBack);
         Button edit = findViewById(R.id.btnManageEdit);
         GridView grid_images_manage = (GridView) findViewById(R.id.grid_images_manage);
+
+        ImageView info = findViewById(R.id.ivManageInfo);
 
         findViewById(R.id.ivManageCartoon).setBackgroundColor(Color.parseColor("#FAFAFAFA"));
 
@@ -71,6 +74,15 @@ public class ManagePrograms extends AppCompatActivity {
                 }else{
                     Toast.makeText(ManagePrograms.this, "Choose a program to edit!", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InfoScreen.textId = 2;
+                Intent intent = new Intent(ManagePrograms.this, InfoScreen.class);
+                startActivity(intent);
             }
         });
     }

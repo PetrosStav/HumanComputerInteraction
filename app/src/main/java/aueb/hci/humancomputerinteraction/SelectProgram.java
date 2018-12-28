@@ -36,6 +36,8 @@ public class SelectProgram extends AppCompatActivity {
         Button btnSelectStart = findViewById(R.id.btnSelectStart);
         GridView grid_images_select = (GridView) findViewById(R.id.grid_images_select);
 
+        ImageView info = findViewById(R.id.ivSelectInfo);
+
         programData = programdao.findAll();
 
         ProgramAdapter adapter = new ProgramAdapter(this);
@@ -79,6 +81,15 @@ public class SelectProgram extends AppCompatActivity {
                     Toast.makeText(SelectProgram.this, "Choose a program to start!", Toast.LENGTH_LONG).show();
                 }
 
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InfoScreen.textId = 0;
+                Intent intent = new Intent(SelectProgram.this, InfoScreen.class);
+                startActivity(intent);
             }
         });
 

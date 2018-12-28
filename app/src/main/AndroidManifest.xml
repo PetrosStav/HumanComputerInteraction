@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="aueb.hci.humancomputerinteraction">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,13 +27,13 @@
         <activity
             android:name=".EditProgram"
             android:label="Edit Program"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="reverseLandscape" />
+            android:screenOrientation="reverseLandscape"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".AdvancedProgram"
             android:label="Create Advanced Program"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="reverseLandscape" />
+            android:screenOrientation="reverseLandscape"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".SelectProgram"
             android:label="Select Program"
@@ -43,6 +44,14 @@
             android:screenOrientation="reverseLandscape" />
         <activity
             android:name=".InfoProgram"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
+        <activity
+            android:name=".InfoScreen"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
+        <activity
+            android:name=".HelpScreen"
             android:screenOrientation="reverseLandscape"
             android:theme="@android:style/Theme.Holo.Light.Dialog" />
     </application>

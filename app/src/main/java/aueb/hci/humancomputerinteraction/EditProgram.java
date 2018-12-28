@@ -68,6 +68,8 @@ public class EditProgram extends AppCompatActivity {
         Knob knob2 = (Knob) findViewById(R.id.knob2Edit);
         Knob knob3 = (Knob) findViewById(R.id.knob3Edit);
 
+        ImageView info = findViewById(R.id.ivEditInfo);
+
         etName = findViewById(R.id.etName);
         etEditDescription = findViewById(R.id.etEditDescription);
         etRpm = findViewById(R.id.etRpm);
@@ -215,6 +217,14 @@ public class EditProgram extends AppCompatActivity {
             }
         });
 
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InfoScreen.textId = 3;
+                Intent intent = new Intent(EditProgram.this, InfoScreen.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

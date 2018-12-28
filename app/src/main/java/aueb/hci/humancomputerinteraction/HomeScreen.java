@@ -594,6 +594,14 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeScreen.this, HelpScreen.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
