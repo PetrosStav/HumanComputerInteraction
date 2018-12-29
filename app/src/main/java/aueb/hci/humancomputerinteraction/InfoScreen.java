@@ -38,15 +38,46 @@ public class InfoScreen extends Activity {
                 break;
             case 1:
                 setTitle("Advanced Program Info");
-                info.setText("In this screen you can start and/or create an advanced program.");
+                htmlSource = "<p>In this screen you create an advanced program to start.</p>" +
+                        "<br><p>You can choose the rpms, the temp and the time by rotating the knobs.</p>" +
+                        "<br><p>You can set the selected program's modes using<br> the Prewash, ECO and Dryer toggle-buttons.</p>" +
+                        "<br><p>You can add the newly created advanced program to your custom programs by clicking on the checkbox.</p>" +
+                        "<br><p>If you choose to add it in your custom programs, you can name it, write its description,favorite it and select an icon for it.</p>" +
+                        "<br><p>Later you can hit Save and Start, to save it and start it.</p>" +
+                        "<br><p>You can always cancel by clicking the CANCEL button.</p>";
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    info.setText(Html.fromHtml(htmlSource, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    info.setText(Html.fromHtml(htmlSource));
+                }
                 break;
             case 2:
                 setTitle("Manage Programs Info");
-                info.setText("In this screen you can manage your programs.");
+                htmlSource = "<p>In this screen you can manage all of your programs.</p>" +
+                        "<br><p>You can delete a program by clicking the X button.</p>" +
+                        "<br><p>You can press the heart icon to favorite and unfavorite.</p>" +
+                        "<br><p>You can view it's details by pressing the info button on the program's image.</p>" +
+                        "<br><p>By clicking on a program it will turn grey and then you can edit it by clicking the edit button.</p>" +
+                        "<br><p>You can always go back by pressing the button Go Back.</p>";
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    info.setText(Html.fromHtml(htmlSource, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    info.setText(Html.fromHtml(htmlSource));
+                }
                 break;
             case 3:
                 setTitle("Edit Program Info");
-                info.setText("In this screen you can edit your program.");
+                htmlSource = "<p>In this screen you can edit the program you just selected.</p>" +
+                        "<br><p>You can choose the rpms, the temp and the time by rotating the knobs.</p>" +
+                        "<br><p>You can set the selected program's modes using<br> the Prewash, ECO and Dryer toggle-buttons.</p>" +
+                        "<br><p>You can name it, write its description,favorite it or select an icon for it.</p>" +
+                        "<br><p>Later you can hit Save,to save it's new configuration.</p>" +
+                        "<br><p>You can always cancel by clicking the CANCEL button.</p>";
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    info.setText(Html.fromHtml(htmlSource, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    info.setText(Html.fromHtml(htmlSource));
+                }
                 break;
             default:
                 break;
