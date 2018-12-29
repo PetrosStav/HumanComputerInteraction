@@ -4,11 +4,20 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,6 +69,22 @@ public class HomeScreen extends AppCompatActivity {
 
     TextToSpeech tts = null;
 
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Channel Name";
+            String description = "Channel Description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("chan_wash", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
     private void programRunHelper(){
 
         // Clear the list adapter selection
@@ -73,6 +98,23 @@ public class HomeScreen extends AppCompatActivity {
 
         if(runningProgram.isPrewash()){
             tvProgram.setText("Program: " + runningProgram.getName()+ " - Prewash");
+            if(speakerEnabled) {
+                tts.speak(runningProgram.getName() + ", Prewashing...", TextToSpeech.QUEUE_ADD, null);
+            }
+            if(notificationsEnabled){
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "chan_wash")
+                        .setSmallIcon(R.drawable.info)
+                        .setContentTitle(runningProgram.getName())
+                        .setContentText(runningProgram.getName() + ", Prewashing...")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(), 0))
+                        .setAutoCancel(true);
+
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+                // notificationId is a unique int for each notification that you must define
+                notificationManager.notify(0, mBuilder.build());
+            }
 
             // Start the Prewash
             animatorSpecial = ValueAnimator.ofInt(0, progressBar.getMax());
@@ -90,6 +132,23 @@ public class HomeScreen extends AppCompatActivity {
                 public void onAnimationCancel(Animator animation) {
                     super.onAnimationCancel(animation);
                     Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Prewash was cancelled!", Toast.LENGTH_LONG).show();
+                    if(speakerEnabled){
+                        tts.speak(runningProgram.getName() + " was cancelled!", TextToSpeech.QUEUE_ADD, null);
+                    }
+                    if(notificationsEnabled){
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                .setSmallIcon(R.drawable.info)
+                                .setContentTitle(runningProgram.getName())
+                                .setContentText(runningProgram.getName() + " was cancelled!")
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                .setAutoCancel(true);
+
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(0, mBuilder.build());
+                    }
                     animSpecialCanceled = true;
                 }
 
@@ -103,8 +162,39 @@ public class HomeScreen extends AppCompatActivity {
                         return;
                     }
                     Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Prewash has finished!", Toast.LENGTH_LONG).show();
+                    if(speakerEnabled) {
+                        tts.speak(runningProgram.getName() + ", Prewash has finished!", TextToSpeech.QUEUE_ADD, null);
+                        tts.speak(runningProgram.getName() + ", Washing...", TextToSpeech.QUEUE_ADD, null);
+                    }
+                    if(notificationsEnabled){
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                .setSmallIcon(R.drawable.info)
+                                .setContentTitle(runningProgram.getName())
+                                .setContentText(runningProgram.getName() + ", Prewash has finished!")
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                .setAutoCancel(true);
 
-                    // Start program
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(0, mBuilder.build());
+                    }
+                    if(notificationsEnabled){
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                .setSmallIcon(R.drawable.info)
+                                .setContentTitle(runningProgram.getName())
+                                .setContentText(runningProgram.getName() + ", Washing...")
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                .setAutoCancel(true);
+
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(0, mBuilder.build());
+                    }
+                    // Start Program
                     tvProgram.setText("Program: " + runningProgram.getName());
 
                     animator = ValueAnimator.ofInt(0, progressBar.getMax());
@@ -128,11 +218,43 @@ public class HomeScreen extends AppCompatActivity {
                                 return;
                             }
                             Toast.makeText(HomeScreen.this, runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
+                            if(speakerEnabled) {
+                                tts.speak(runningProgram.getName() + " has finished washing!", TextToSpeech.QUEUE_ADD, null);
+                            }
+                            if(notificationsEnabled){
+                                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                        .setSmallIcon(R.drawable.info)
+                                        .setContentTitle(runningProgram.getName())
+                                        .setContentText(runningProgram.getName() + " has finished washing!")
+                                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                        .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                        .setAutoCancel(true);
 
+                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                                // notificationId is a unique int for each notification that you must define
+                                notificationManager.notify(0, mBuilder.build());
+                            }
                             if(runningProgram.isDryer()){
 
                                 tvProgram.setText("Program: " + runningProgram.getName()+ " - Dryer");
+                                if(speakerEnabled) {
+                                    tts.speak(runningProgram.getName() + ", Drying...", TextToSpeech.QUEUE_ADD, null);
+                                }
+                                if(notificationsEnabled){
+                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                            .setSmallIcon(R.drawable.info)
+                                            .setContentTitle(runningProgram.getName())
+                                            .setContentText(runningProgram.getName() + ", Drying...")
+                                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                            .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                            .setAutoCancel(true);
 
+                                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                                    // notificationId is a unique int for each notification that you must define
+                                    notificationManager.notify(0, mBuilder.build());
+                                }
                                 // Start the Dryer
                                 animatorSpecial = ValueAnimator.ofInt(0, progressBar.getMax());
                                 animatorSpecial.setInterpolator(new LinearInterpolator());
@@ -149,6 +271,23 @@ public class HomeScreen extends AppCompatActivity {
                                     public void onAnimationCancel(Animator animation) {
                                         super.onAnimationCancel(animation);
                                         Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer was cancelled!", Toast.LENGTH_LONG).show();
+                                        if(speakerEnabled){
+                                            tts.speak(runningProgram.getName() + " was cancelled!", TextToSpeech.QUEUE_ADD, null);
+                                        }
+                                        if(notificationsEnabled){
+                                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                                    .setSmallIcon(R.drawable.info)
+                                                    .setContentTitle(runningProgram.getName())
+                                                    .setContentText(runningProgram.getName() + "was cancelled!")
+                                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                                    .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                                    .setAutoCancel(true);
+
+                                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                                            // notificationId is a unique int for each notification that you must define
+                                            notificationManager.notify(0, mBuilder.build());
+                                        }
                                         animSpecialCanceled = true;
                                     }
 
@@ -162,6 +301,40 @@ public class HomeScreen extends AppCompatActivity {
                                             return;
                                         }
                                         Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer has finished!", Toast.LENGTH_LONG).show();
+                                        if(speakerEnabled) {
+                                            tts.speak(runningProgram.getName() + ", Dryer has finished!", TextToSpeech.QUEUE_ADD, null);
+                                        }
+                                        if(notificationsEnabled){
+                                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                                    .setSmallIcon(R.drawable.info)
+                                                    .setContentTitle(runningProgram.getName())
+                                                    .setContentText(runningProgram.getName() + ", Dryer has finished!")
+                                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                                    .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                                    .setAutoCancel(true);
+
+                                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                                            // notificationId is a unique int for each notification that you must define
+                                            notificationManager.notify(0, mBuilder.build());
+                                        }
+                                        if(speakerEnabled) {
+                                            tts.speak(runningProgram.getName() + " has finished!", TextToSpeech.QUEUE_ADD, null);
+                                        }
+                                        if(notificationsEnabled){
+                                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                                    .setSmallIcon(R.drawable.info)
+                                                    .setContentTitle(runningProgram.getName())
+                                                    .setContentText(runningProgram.getName() + " has finished!")
+                                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                                    .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                                    .setAutoCancel(true);
+
+                                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                                            // notificationId is a unique int for each notification that you must define
+                                            notificationManager.notify(0, mBuilder.build());
+                                        }
                                         runningProgram = null;
                                     }
                                 });
@@ -215,6 +388,23 @@ public class HomeScreen extends AppCompatActivity {
                         public void onAnimationCancel(Animator animation) {
                             super.onAnimationCancel(animation);
                             Toast.makeText(HomeScreen.this, runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
+                            if(speakerEnabled) {
+                                tts.speak(runningProgram.getName() + "was canceled!", TextToSpeech.QUEUE_ADD, null);
+                            }
+                            if(notificationsEnabled){
+                                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                        .setSmallIcon(R.drawable.info)
+                                        .setContentTitle(runningProgram.getName())
+                                        .setContentText(runningProgram.getName() + "was canceled!")
+                                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                        .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                        .setAutoCancel(true);
+
+                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                                // notificationId is a unique int for each notification that you must define
+                                notificationManager.notify(0, mBuilder.build());
+                            }
                             runningProgram = null;
                             animCanceled = true;
                         }
@@ -295,6 +485,23 @@ public class HomeScreen extends AppCompatActivity {
             animatorTimeSpecial.start();
         }else{ // No Prewash
 
+            if(speakerEnabled) {
+                tts.speak(runningProgram.getName() + ", Washing...", TextToSpeech.QUEUE_ADD, null);
+            }
+            if(notificationsEnabled){
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                        .setSmallIcon(R.drawable.info)
+                        .setContentTitle(runningProgram.getName())
+                        .setContentText(runningProgram.getName() + ", Washing...")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                        .setAutoCancel(true);
+
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                // notificationId is a unique int for each notification that you must define
+                notificationManager.notify(0, mBuilder.build());
+            }
             tvProgram.setText("Program: " + runningProgram.getName());
 
             animator = ValueAnimator.ofInt(0, progressBar.getMax());
@@ -318,11 +525,43 @@ public class HomeScreen extends AppCompatActivity {
                         return;
                     }
                     Toast.makeText(HomeScreen.this, runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
+                    if(speakerEnabled) {
+                        tts.speak(runningProgram.getName() + " has finished washing!", TextToSpeech.QUEUE_ADD, null);
+                    }
+                    if(notificationsEnabled){
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                .setSmallIcon(R.drawable.info)
+                                .setContentTitle(runningProgram.getName())
+                                .setContentText(runningProgram.getName() + " has finished washing!")
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                .setAutoCancel(true);
 
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(0, mBuilder.build());
+                    }
                     if(runningProgram.isDryer()){
 
                         tvProgram.setText("Program: " + runningProgram.getName()+ " - Dryer");
+                        if(speakerEnabled) {
+                            tts.speak(runningProgram.getName() + ", Drying...", TextToSpeech.QUEUE_ADD, null);
+                        }
+                        if(notificationsEnabled){
+                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                    .setSmallIcon(R.drawable.info)
+                                    .setContentTitle(runningProgram.getName())
+                                    .setContentText(runningProgram.getName() + ", Drying...")
+                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                    .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                    .setAutoCancel(true);
 
+                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                            // notificationId is a unique int for each notification that you must define
+                            notificationManager.notify(0, mBuilder.build());
+                        }
                         // Start the Dryer
                         animatorSpecial = ValueAnimator.ofInt(0, progressBar.getMax());
                         animatorSpecial.setInterpolator(new LinearInterpolator());
@@ -339,6 +578,23 @@ public class HomeScreen extends AppCompatActivity {
                             public void onAnimationCancel(Animator animation) {
                                 super.onAnimationCancel(animation);
                                 Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer was cancelled!", Toast.LENGTH_LONG).show();
+                                if(speakerEnabled){
+                                    tts.speak(runningProgram.getName() + " was cancelled!", TextToSpeech.QUEUE_ADD, null);
+                                }
+                                if(notificationsEnabled){
+                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                            .setSmallIcon(R.drawable.info)
+                                            .setContentTitle(runningProgram.getName())
+                                            .setContentText(runningProgram.getName() + " was cancelled!")
+                                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                            .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                            .setAutoCancel(true);
+
+                                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                                    // notificationId is a unique int for each notification that you must define
+                                    notificationManager.notify(0, mBuilder.build());
+                                }
                                 animSpecialCanceled = true;
                             }
 
@@ -352,6 +608,38 @@ public class HomeScreen extends AppCompatActivity {
                                     return;
                                 }
                                 Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer has finished!", Toast.LENGTH_LONG).show();
+                                if(speakerEnabled) {
+                                    tts.speak(runningProgram.getName() + ", Dryer has finished!", TextToSpeech.QUEUE_ADD, null);
+                                    tts.speak(runningProgram.getName() + " has finished!", TextToSpeech.QUEUE_ADD, null);
+                                }
+                                if(notificationsEnabled){
+                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                            .setSmallIcon(R.drawable.info)
+                                            .setContentTitle(runningProgram.getName())
+                                            .setContentText(runningProgram.getName() + ", Dryer has finished!")
+                                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                            .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                            .setAutoCancel(true);
+
+                                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                                    // notificationId is a unique int for each notification that you must define
+                                    notificationManager.notify(0, mBuilder.build());
+                                }
+                                if(notificationsEnabled){
+                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                            .setSmallIcon(R.drawable.info)
+                                            .setContentTitle(runningProgram.getName())
+                                            .setContentText(runningProgram.getName() + " has finished!")
+                                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                            .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                            .setAutoCancel(true);
+
+                                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                                    // notificationId is a unique int for each notification that you must define
+                                    notificationManager.notify(0, mBuilder.build());
+                                }
                                 runningProgram = null;
                             }
                         });
@@ -405,6 +693,23 @@ public class HomeScreen extends AppCompatActivity {
                 public void onAnimationCancel(Animator animation) {
                     super.onAnimationCancel(animation);
                     Toast.makeText(HomeScreen.this, runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
+                    if(speakerEnabled) {
+                        tts.speak(runningProgram.getName() + " was cancelled!", TextToSpeech.QUEUE_ADD, null);
+                    }
+                    if(notificationsEnabled){
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
+                                .setSmallIcon(R.drawable.info)
+                                .setContentTitle(runningProgram.getName())
+                                .setContentText(runningProgram.getName() + " was cancelled!")
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                                .setAutoCancel(true);
+
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(0, mBuilder.build());
+                    }
                     runningProgram = null;
                     animCanceled = true;
                 }
@@ -503,6 +808,8 @@ public class HomeScreen extends AppCompatActivity {
             progressBar.setProgress(0);
         }
 
+        createNotificationChannel();
+
         findViewById(R.id.ivCartoon).setBackgroundColor(Color.parseColor("#FAFAFAFA")); // set cartoon's color to gray
 
         programData = programdao.findAll();
@@ -575,7 +882,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 micEnabled = !micEnabled;
-                if(micEnabled){
+                if(!micEnabled){
                     ivHomeMic.setImageResource(R.drawable.micnot);
                 }else{
                     ivHomeMic.setImageResource(R.drawable.mic);
@@ -587,7 +894,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 speakerEnabled = !speakerEnabled;
-                if(speakerEnabled){
+                if(!speakerEnabled){
                     ivHomeSpeaker.setImageResource(R.drawable.speaknot);
                 }else{
                     ivHomeSpeaker.setImageResource(R.drawable.speak);
@@ -599,7 +906,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 notificationsEnabled = !notificationsEnabled;
-                if(notificationsEnabled){
+                if(!notificationsEnabled){
                     ivHomeNotification.setImageResource(R.drawable.notifynot);
                 }else{
                     ivHomeNotification.setImageResource(R.drawable.notify);
@@ -638,7 +945,7 @@ public class HomeScreen extends AppCompatActivity {
         findViewById(R.id.ivCartoon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tts.speak("What you want,bro? Don't squeeze my tits!!!", TextToSpeech.QUEUE_ADD, null);
+                tts.speak("That tickles!", TextToSpeech.QUEUE_ADD, null);
             }
         });
 
