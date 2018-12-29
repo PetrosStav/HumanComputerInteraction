@@ -13,11 +13,11 @@ public class HelpScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_screen);
 
-        Button ok = findViewById(R.id.help_ok);
+        Button exit = findViewById(R.id.exit_help);
 
         setTitle("Help Screen");
 
-        ok.setOnClickListener(new View.OnClickListener() {
+        exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
