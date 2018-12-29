@@ -1,8 +1,10 @@
 package aueb.hci.humancomputerinteraction;
 
 import android.app.Activity;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,7 +26,15 @@ public class InfoScreen extends Activity {
         switch(textId){
             case 0:
                 setTitle("Select Program Info");
-                info.setText("In this screen you can select a program to start.");
+                String htmlSource = "<p>In this screen you select the washing program you wish to start.</p>" +
+                        "<br><p>You can press the heart icon to favorite and unfavorite.</p>" +
+                        "<br><p>You can press the info button on a program to see it's details.</p>" +
+                        "<br><p>You can also override the selected program's modes using<br> the Prewash, ECO and Dryer toggle-buttons.</p>";
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    info.setText(Html.fromHtml(htmlSource, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    info.setText(Html.fromHtml(htmlSource));
+                }
                 break;
             case 1:
                 setTitle("Advanced Program Info");

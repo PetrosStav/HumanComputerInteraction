@@ -15,6 +15,8 @@ public class HelpScreen extends Activity {
 
         Button ok = findViewById(R.id.help_ok);
 
+        setTitle("Help Screen");
+
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

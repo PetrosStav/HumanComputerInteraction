@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import aueb.hci.humancomputerinteraction.DAO.ProgramDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -54,6 +57,8 @@ public class HomeScreen extends AppCompatActivity {
     private boolean micEnabled = true;
     private boolean speakerEnabled = true;
     private boolean notificationsEnabled = true;
+
+    TextToSpeech tts = null;
 
     private void programRunHelper(){
 
@@ -599,6 +604,33 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HomeScreen.this, HelpScreen.class);
                 startActivity(intent);
+            }
+        });
+
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int ttsLang = tts.setLanguage(Locale.US);
+
+                    if (ttsLang == TextToSpeech.LANG_MISSING_DATA
+                            || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("TTS", "The Language is not supported!");
+                    } else {
+                        Log.i("TTS", "Language Supported.");
+                    }
+                    Log.i("TTS", "Initialization success.");
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "TTS Initialization failed!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        findViewById(R.id.ivCartoon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tts.speak("What you want,bro? Don't squeeze my tits!!!", TextToSpeech.QUEUE_ADD, null);
             }
         });
 
