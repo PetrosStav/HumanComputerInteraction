@@ -6,15 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".EditProgram">
 
+    <TextView
+        android:id="@+id/editTime3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="134dp"
+        android:layout_marginBottom="20dp"
+        android:text="210"
+        app:layout_constraintBottom_toBottomOf="@+id/knob3Edit"
+        app:layout_constraintStart_toEndOf="@+id/editTime" />
+
+    <TextView
+        android:id="@+id/editTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="20dp"
+        android:text="20"
+        app:layout_constraintBottom_toBottomOf="@+id/knob3Edit"
+        app:layout_constraintStart_toEndOf="@+id/editTemp3" />
+
+    <TextView
+        android:id="@+id/editTemp3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="20dp"
+        android:text="95"
+        app:layout_constraintBottom_toBottomOf="@+id/knob2Edit"
+        app:layout_constraintStart_toEndOf="@+id/editTemp" />
+
+    <TextView
+        android:id="@+id/editTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="116dp"
+        android:layout_marginBottom="20dp"
+        android:text="20"
+        app:layout_constraintBottom_toBottomOf="@+id/knob2Edit"
+        app:layout_constraintStart_toEndOf="@+id/editRPM" />
+
+    <TextView
+        android:id="@+id/editRPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="20dp"
+        android:focusableInTouchMode="false"
+        android:text="1400"
+        app:layout_constraintBottom_toBottomOf="@+id/knob1Edit"
+        app:layout_constraintStart_toEndOf="@+id/editRPM1" />
+
     <EditText
         android:id="@+id/etTime"
         android:layout_width="66dp"
         android:layout_height="40dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="number"
+        android:focusableInTouchMode="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvEditTime"
         app:layout_constraintTop_toBottomOf="@+id/knob3Edit" />
 
     <ToggleButton
@@ -23,10 +78,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="164dp"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="360dp"
         android:text="ToggleButton"
         android:textAllCaps="true"
         android:textOff="Eco"
         android:textOn="Eco"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEditRpm" />
 
@@ -37,9 +94,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="360dp"
         android:text="ToggleButton"
         android:textOff="Prewash"
         android:textOn="Prewash"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tbEditDryer"
         app:layout_constraintStart_toEndOf="@+id/tbEditEco"
         app:layout_constraintTop_toBottomOf="@+id/tvEditTemp" />
@@ -50,25 +109,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="164dp"
+        android:layout_marginBottom="360dp"
         android:text="ToggleButton"
         android:textOff="Dryer"
         android:textOn="Dryer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEditTime" />
 
     <it.beppi.knoblibrary.Knob
         android:id="@+id/knob1Edit"
-        android:layout_width="165dp"
+        android:layout_width="168dp"
         android:layout_height="153dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        app:kShowBalloonValues="true"
+        app:kBalloonValuesArray="@array/balloon_values_rpms"
         app:kFreeRotation="false"
         app:kMaxAngle="120.0"
         app:kMinAngle="-120.0"
         app:kNumberOfStates="6"
-        app:kBalloonValuesArray="@array/balloon_values_rpms"
+        app:kShowBalloonValues="false"
         app:layout_constraintEnd_toStartOf="@+id/knob2Edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -80,12 +141,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        app:kShowBalloonValues="true"
+        app:kBalloonValuesArray="@array/balloon_values_temps"
         app:kFreeRotation="false"
         app:kMaxAngle="120.0"
         app:kMinAngle="-120.0"
         app:kNumberOfStates="6"
-        app:kBalloonValuesArray="@array/balloon_values_temps"
+        app:kShowBalloonValues="false"
         app:layout_constraintEnd_toStartOf="@+id/knob3Edit"
         app:layout_constraintStart_toEndOf="@+id/knob1Edit"
         app:layout_constraintTop_toTopOf="parent" />
@@ -97,12 +158,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        app:kShowBalloonValues="true"
+        app:kBalloonValuesArray="@array/balloon_values_times"
         app:kFreeRotation="false"
         app:kMaxAngle="120.0"
         app:kMinAngle="-120.0"
         app:kNumberOfStates="11"
-        app:kBalloonValuesArray="@array/balloon_values_times"
+        app:kShowBalloonValues="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/knob2Edit"
         app:layout_constraintTop_toTopOf="parent" />
@@ -154,14 +215,11 @@
         android:id="@+id/btnEditSave"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="300dp"
         android:layout_marginBottom="32dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
-        app:layout_constraintStart_toEndOf="@+id/btnEditCancel" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tvEditName"
@@ -253,24 +311,38 @@
 
     <EditText
         android:id="@+id/etRpm"
-        android:layout_width="66dp"
-        android:layout_height="40dp"
+        android:layout_width="80dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="188dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="false"
+        android:contextClickable="false"
+        android:cursorVisible="false"
+        android:editable="false"
         android:ems="10"
+        android:focusableInTouchMode="false"
         android:inputType="number"
+        android:linksClickable="false"
+        android:longClickable="false"
         app:layout_constraintEnd_toStartOf="@+id/tvEditTemp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvEditRpm"
         app:layout_constraintTop_toBottomOf="@+id/knob1Edit" />
 
     <EditText
         android:id="@+id/etTemp"
         android:layout_width="66dp"
         android:layout_height="40dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="196dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="number"
+        android:focusableInTouchMode="false"
         app:layout_constraintEnd_toStartOf="@+id/tvEditTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvEditTemp"
         app:layout_constraintTop_toBottomOf="@+id/knob2Edit" />
 
     <ImageView
@@ -282,5 +354,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/info" />
+
+    <TextView
+        android:id="@+id/editRPM1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginBottom="20dp"
+        android:text="400"
+        app:layout_constraintBottom_toBottomOf="@+id/knob1Edit"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

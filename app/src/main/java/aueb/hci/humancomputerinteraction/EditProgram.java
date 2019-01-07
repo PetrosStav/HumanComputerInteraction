@@ -75,6 +75,11 @@ public class EditProgram extends AppCompatActivity {
         etRpm = findViewById(R.id.etRpm);
         etTime = findViewById(R.id.etTime);
         etTemp = findViewById(R.id.etTemp);
+
+        etRpm.setKeyListener(null);
+        etTime.setKeyListener(null);
+        etTemp.setKeyListener(null);
+
         btnEditCancel = findViewById(R.id.btnEditCancel);
         btnEditSave = findViewById(R.id.btnEditSave);
         btnEditSelectIco = findViewById(R.id.btnEditSelectIco);
