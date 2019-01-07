@@ -248,7 +248,7 @@
         android:layout_height="71dp"
         android:layout_marginStart="72dp"
         android:layout_marginTop="8dp"
-        android:text="By selecting a program from the list it will turn grey. Then you can start it by pressing the start button or just start the dryer. Also you can unfavorite a program by pressing the X button next to its name."
+        android:text="By selecting a program from the list it will turn grey. Then you can start it by pressing the Start Favorite button. Also you can unfavorite a program by pressing the X button next to its name."
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/favorites_helper"

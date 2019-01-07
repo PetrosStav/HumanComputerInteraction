@@ -42,7 +42,6 @@ public abstract class Initializer {
         p3.setTEMP(75);
 
         Program p4 = new Program();
-//        p4.setName("Program h istoria ths zohs mou noumero 4 : THE ULTIMATE SEQUEL");
         p4.setName("Program 4");
         p4.setDescription("Program 4 Description");
         p4.setFavorited(false);

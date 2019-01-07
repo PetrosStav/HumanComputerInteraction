@@ -40,7 +40,7 @@
             android:screenOrientation="reverseLandscape" />
         <activity
             android:name=".ManagePrograms"
-            android:label="Here you can manage your programs."
+            android:label="Manage Programs"
             android:screenOrientation="reverseLandscape" />
         <activity
             android:name=".InfoProgram"

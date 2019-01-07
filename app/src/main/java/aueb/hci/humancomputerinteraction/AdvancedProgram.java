@@ -89,6 +89,11 @@ public class AdvancedProgram extends AppCompatActivity {
         etRpmAdv = findViewById(R.id.etRpmAdv);
         etTimeAdv = findViewById(R.id.etTimeAdv);
         etTempAdv = findViewById(R.id.etTempAdv);
+
+        etRpmAdv.setKeyListener(null);
+        etTimeAdv.setKeyListener(null);
+        etTempAdv.setKeyListener(null);
+
         btnSelectIco = findViewById(R.id.btnAdvancedSelectIco);
         btnStart = findViewById(R.id.btnAdvancedStart);
         btnCancel = findViewById(R.id.btnAdvancedCancel);

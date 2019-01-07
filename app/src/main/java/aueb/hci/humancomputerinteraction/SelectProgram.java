@@ -83,6 +83,15 @@ public class SelectProgram extends AppCompatActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // TODO: REMOVE
+//                Toast.makeText(SelectProgram.this, "In this screen you can select a Program from the saved programs by clicking on it and pressing 'Start' to start a wash.\n" +
+//                        "By pressing in one of the above buttons you can sort the programs based on their type.\n" +
+//                        "By pressing on the shirt's info icon, you get info about that program.\n" +
+//                        "By pressing on the shirt's heart icon, you can favorite and unfavorite the program.\n" +
+//                        "By pressing on the shirt's gear icon, you can do configurations for the program.\n" +
+//                        "By enabling one of the override toggle-buttons, you override that mode for any chosen program.", Toast.LENGTH_LONG).show();
+
                 InfoScreen.textId = 0;
                 Intent intent = new Intent(SelectProgram.this, InfoScreen.class);
                 startActivity(intent);

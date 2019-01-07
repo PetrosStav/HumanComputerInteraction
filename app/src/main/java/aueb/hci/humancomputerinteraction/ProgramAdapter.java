@@ -148,7 +148,8 @@ public class ProgramAdapter extends BaseAdapter {
             ((ImageView)view.findViewById(R.id.ClothImgMngInfo)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Toast.makeText(view.getContext(), prog.getDescription(), Toast.LENGTH_LONG).show();
+                    // TODO: REMOVE
+//                    Toast.makeText(view.getContext(), prog.getDescription(), Toast.LENGTH_LONG).show();
                     InfoProgram.info_program = prog;
                     Intent intent = new Intent(context, InfoProgram.class);
                     context.startActivity(intent);

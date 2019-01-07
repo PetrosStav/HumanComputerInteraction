@@ -58,12 +58,11 @@ public class HomeScreen extends AppCompatActivity {
     ImageView ivCircleWasher, ivCircleDryer, ivCirclePrewasher;
     Button start = null;
 
-    ImageView ivHomeMic, ivHomeSpeaker, ivHomeNotification;
+    ImageView ivHomeSpeaker, ivHomeNotification;
 
     private boolean animCanceled = false;
     private boolean animSpecialCanceled = false;
 
-    private boolean micEnabled = true;
     private boolean speakerEnabled = true;
     private boolean notificationsEnabled = true;
 
@@ -155,7 +154,7 @@ public class HomeScreen extends AppCompatActivity {
                 @Override
                 public void onAnimationEnd(Animator animation, boolean isReverse) {
                     super.onAnimationEnd(animation);
-                    start.setText("Start");
+                    start.setText("Start Favorite");
                     ivCirclePrewasher.setImageResource(R.drawable.circle);
                     if(animSpecialCanceled){
                         animSpecialCanceled=false;
@@ -211,7 +210,7 @@ public class HomeScreen extends AppCompatActivity {
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
                             // start your activity here
-                            start.setText("Start");
+                            start.setText("Start Favorite");
                             ivCircleWasher.setImageResource(R.drawable.circle);
                             if(animCanceled) {
                                 animCanceled = false;
@@ -294,7 +293,7 @@ public class HomeScreen extends AppCompatActivity {
                                     @Override
                                     public void onAnimationEnd(Animator animation, boolean isReverse) {
                                         super.onAnimationEnd(animation);
-                                        start.setText("Start");
+                                        start.setText("Start Favorite");
                                         ivCircleDryer.setImageResource(R.drawable.circle);
                                         if(animSpecialCanceled){
                                             animSpecialCanceled=false;
@@ -518,7 +517,7 @@ public class HomeScreen extends AppCompatActivity {
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     // start your activity here
-                    start.setText("Start");
+                    start.setText("Start Favorite");
                     ivCircleWasher.setImageResource(R.drawable.circle);
                     if(animCanceled) {
                         animCanceled = false;
@@ -601,7 +600,7 @@ public class HomeScreen extends AppCompatActivity {
                             @Override
                             public void onAnimationEnd(Animator animation, boolean isReverse) {
                                 super.onAnimationEnd(animation);
-                                start.setText("Start");
+                                start.setText("Start Favorite");
                                 ivCircleDryer.setImageResource(R.drawable.circle);
                                 if(animSpecialCanceled){
                                     animSpecialCanceled=false;
@@ -796,14 +795,12 @@ public class HomeScreen extends AppCompatActivity {
         tvProgram = findViewById(R.id.tvProgram);
         tvTimeRemaining = findViewById(R.id.tvTimeRemaining);
 
-        ivHomeMic = findViewById(R.id.ivHomeMic);
         ivHomeSpeaker = findViewById(R.id.ivHomeSpeaker);
         ivHomeNotification = findViewById(R.id.ivHomeNotification);
 
         if(!initialized){
             new DataInitializer().prepareData();
             initialized = true;
-            Toast.makeText(this,"Loading Data!!",Toast.LENGTH_LONG).show();
             progressBar.setProgress(0);
         }
 
@@ -852,7 +849,7 @@ public class HomeScreen extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(start.getText().toString().equals("Start")){
+                if(start.getText().toString().equals("Start Favorite")){
                     if(selectedProgram != null){
                         programRunHelper();
                     }else{
@@ -869,23 +866,11 @@ public class HomeScreen extends AppCompatActivity {
                     }
                     progressBar.setProgress(0);
                     // TODO IF WE WANT ADD PAUSE
-                    start.setText("Start");
+                    start.setText("Start Favorite");
                     runningProgram = null;
                 }
 
 
-            }
-        });
-
-        ivHomeMic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                micEnabled = !micEnabled;
-                if(!micEnabled){
-                    ivHomeMic.setImageResource(R.drawable.micnot);
-                }else{
-                    ivHomeMic.setImageResource(R.drawable.mic);
-                }
             }
         });
 
