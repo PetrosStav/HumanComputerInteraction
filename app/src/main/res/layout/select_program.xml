@@ -25,63 +25,11 @@
         android:id="@+id/ivSelectInfo"
         android:layout_width="85dp"
         android:layout_height="74dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/custom_select"
+        android:layout_marginEnd="27dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/info" />
-
-    <Button
-        android:id="@+id/common_select"
-        android:layout_width="172dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/common"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/stains_select"
-        android:layout_width="172dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/stains"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/materials_select"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/custom_select"
-        android:layout_width="172dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/custom"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/stains_select"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/materials_select"
-        android:layout_width="172dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/materials"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/common_select"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
         android:id="@+id/tbSelectPrewash"
@@ -144,15 +92,12 @@
         android:id="@+id/grid_images_select"
         android:layout_width="1020dp"
         android:layout_height="370dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="28dp"
         android:numColumns="3"
         app:layout_constraintBottom_toTopOf="@+id/tbSelectPrewash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materials_select"
-        app:layout_constraintVertical_bias="0.636" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

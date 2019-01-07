@@ -118,29 +118,16 @@
         app:layout_constraintTop_toBottomOf="@+id/btManagePrograms" />
 
     <Button
-        android:id="@+id/btStartDryer"
-        android:layout_width="157dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/start_dryer"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/btStart"
         android:layout_width="157dp"
         android:layout_height="50dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="44dp"
         android:text="@string/start_washer"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btStartDryer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -278,5 +265,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvTimeRemaining"
         app:srcCompat="@drawable/notify" />
+
+    <TextView
+        android:id="@+id/help_start_text"
+        android:layout_width="225dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="8dp"
+        android:text="After you select a favorite program, you can click the Start button to start it."
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvFavorites" />
 
 </android.support.constraint.ConstraintLayout>

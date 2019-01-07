@@ -789,7 +789,6 @@ public class HomeScreen extends AppCompatActivity {
         ivCircleDryer = findViewById(R.id.ivCircleDryer);
         ivCirclePrewasher = findViewById(R.id.ivCirclePrewasher);
         start = findViewById(R.id.btStart);
-        Button start_dryer = findViewById(R.id.btStartDryer);
         ListView lvFavorites = findViewById(R.id.lvFavorites);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setProgressTintList(ColorStateList.valueOf(Color.RED));

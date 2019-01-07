@@ -25,10 +25,6 @@ public class SelectProgram extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_program);
-        Button common_select = findViewById(R.id.common_select);
-        Button materials_select = findViewById(R.id.materials_select);
-        Button stains_select = findViewById(R.id.stains_select);
-        Button custom_select = findViewById(R.id.custom_select);
         ToggleButton tbSelectPrewash = findViewById(R.id.tbSelectPrewash);
         ToggleButton tbSelectEco = findViewById(R.id.tbSelectEco);
         ToggleButton tbSelectDryer = findViewById(R.id.tbSelectDryer);
