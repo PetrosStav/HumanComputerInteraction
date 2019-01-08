@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -73,6 +74,9 @@ public class ManagePrograms extends AppCompatActivity {
                     }
                 }else{
                     Toast.makeText(ManagePrograms.this, "Choose a program to edit!", Toast.LENGTH_LONG).show();
+                    // Play warning sound
+                    MediaPlayer media = MediaPlayer.create(getApplicationContext(), R.raw.sound_effect);
+                    media.start();
                 }
             }
         });

@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/knob3Edit" />
 
     <ToggleButton
-        android:id="@+id/tbEditEco"
+        android:id="@+id/tbEditPrewash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="164dp"
@@ -81,14 +81,14 @@
         android:layout_marginBottom="360dp"
         android:text="ToggleButton"
         android:textAllCaps="true"
-        android:textOff="Eco"
-        android:textOn="Eco"
+        android:textOff="Prewash"
+        android:textOn="Prewash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEditRpm" />
 
     <ToggleButton
-        android:id="@+id/tbEditPrewash"
+        android:id="@+id/tbEditEco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -96,11 +96,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="360dp"
         android:text="ToggleButton"
-        android:textOff="Prewash"
-        android:textOn="Prewash"
+        android:textOff="Eco"
+        android:textOn="Eco"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tbEditDryer"
-        app:layout_constraintStart_toEndOf="@+id/tbEditEco"
+        app:layout_constraintStart_toEndOf="@+id/tbEditPrewash"
         app:layout_constraintTop_toBottomOf="@+id/tvEditTemp" />
 
     <ToggleButton

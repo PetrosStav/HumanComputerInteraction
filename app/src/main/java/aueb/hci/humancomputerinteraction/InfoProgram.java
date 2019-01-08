@@ -35,7 +35,7 @@ public class InfoProgram extends Activity {
             eco_bool.setText((info_program.isEco()?" Yes":" No"));
             prewash_bool.setText((info_program.isPrewash()?" Yes":" No"));
             dryer_bool.setText((info_program.isDryer()?" Yes":" No"));
-            description.setText(info_program.getDescription());
+            description.setText(" " + info_program.getDescription() + " ");
             if(info_program.getImage()==null) {
                 program_image.setImageResource(R.drawable.shirt_cartoon_deault);
             }else{

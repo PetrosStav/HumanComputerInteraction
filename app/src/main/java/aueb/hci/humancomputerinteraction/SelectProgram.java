@@ -2,6 +2,7 @@ package aueb.hci.humancomputerinteraction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -75,6 +76,9 @@ public class SelectProgram extends AppCompatActivity {
                     finish();
                 }else{
                     Toast.makeText(SelectProgram.this, "Choose a program to start!", Toast.LENGTH_LONG).show();
+                    // Play warning sound
+                    MediaPlayer media = MediaPlayer.create(getApplicationContext(), R.raw.sound_effect);
+                    media.start();
                 }
 
             }

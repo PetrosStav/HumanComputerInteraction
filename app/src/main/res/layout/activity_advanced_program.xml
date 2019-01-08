@@ -235,7 +235,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnAdvancedStart" />
 
     <ToggleButton
-        android:id="@+id/tbAdvancedEco"
+        android:id="@+id/tbAdvancedPrewash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="164dp"
@@ -243,15 +243,15 @@
         android:layout_marginBottom="360dp"
         android:text="ToggleButton"
         android:textAllCaps="true"
-        android:textOff="Eco"
-        android:textOn="Eco"
+        android:textOff="Prewash"
+        android:textOn="Prewash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAdvancedRpm"
         app:layout_constraintVertical_bias="0.478" />
 
     <ToggleButton
-        android:id="@+id/tbAdvancedPrewash"
+        android:id="@+id/tbAdvancedEco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -259,11 +259,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="360dp"
         android:text="ToggleButton"
-        android:textOff="Prewash"
-        android:textOn="Prewash"
+        android:textOff="Eco"
+        android:textOn="Eco"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tbAdvancedDryer"
-        app:layout_constraintStart_toEndOf="@+id/tbAdvancedEco"
+        app:layout_constraintStart_toEndOf="@+id/tbAdvancedPrewash"
         app:layout_constraintTop_toBottomOf="@+id/tvAdvancedTemp"
         app:layout_constraintVertical_bias="0.478" />
 

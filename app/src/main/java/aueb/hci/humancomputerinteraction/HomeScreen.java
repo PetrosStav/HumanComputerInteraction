@@ -14,6 +14,7 @@ import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.NotificationCompat;
@@ -854,6 +855,9 @@ public class HomeScreen extends AppCompatActivity {
                         programRunHelper();
                     }else{
                         Toast.makeText(HomeScreen.this, "Choose a favorite program to start!", Toast.LENGTH_LONG).show();
+                        // Play warning sound
+                        MediaPlayer media = MediaPlayer.create(getApplicationContext(), R.raw.sound_effect);
+                        media.start();
                     }
                 }else{
                     if(animatorSpecial!=null) {
@@ -865,7 +869,6 @@ public class HomeScreen extends AppCompatActivity {
                         animatorTime.cancel();
                     }
                     progressBar.setProgress(0);
-                    // TODO IF WE WANT ADD PAUSE
                     start.setText("Start Favorite");
                     runningProgram = null;
                 }
