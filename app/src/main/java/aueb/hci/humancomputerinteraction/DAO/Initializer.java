@@ -59,8 +59,8 @@ public abstract class Initializer {
         p5.setTEMP(60);
 
         Program p6 = new Program();
-        p6.setName("Program for white clothes and easy stains");
-        p6.setDescription("Program for white clothes and easy stains Description");
+        p6.setName("Default Program 6");
+        p6.setDescription("Default Program 6 Description");
         p6.setFavorited(true);
         p6.setDryer(true);
         p6.setTIME(60);

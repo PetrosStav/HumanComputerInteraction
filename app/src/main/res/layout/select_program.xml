@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/ivSelectCartoon"
         android:layout_width="130dp"
-        android:layout_height="155dp"
+        android:layout_height="144dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/shutterstock_117877078" />
@@ -99,14 +99,15 @@
     <GridView
         android:id="@+id/grid_images_select"
         android:layout_width="1020dp"
-        android:layout_height="370dp"
+        android:layout_height="381dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="144dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="28dp"
         android:numColumns="3"
-        app:layout_constraintBottom_toTopOf="@+id/tbSelectPrewash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvSelectProgram"

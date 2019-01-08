@@ -99,7 +99,7 @@
 
     <EditText
         android:id="@+id/etAdvancedDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginBottom="24dp"
