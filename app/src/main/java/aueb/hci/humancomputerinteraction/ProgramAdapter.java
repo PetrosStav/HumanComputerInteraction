@@ -24,12 +24,6 @@ public class ProgramAdapter extends BaseAdapter {
     private List<Program> dataList, copyOfData;
     private LayoutInflater inflater;
     private Boolean what_activity;
-//    private Boolean info_pressed = false;
-//
-//
-//    public Boolean getInfo_pressed() {
-//        return info_pressed;
-//    }
 
     public Program selectedProgram;
 
@@ -80,7 +74,7 @@ public class ProgramAdapter extends BaseAdapter {
         if(!what_activity){
 
             if(prog.getImage()==null) {
-                ((ImageView) view.findViewById(R.id.ivClothImgProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
+                ((ImageView) view.findViewById(R.id.ivClothImgProgram)).setImageResource(R.drawable.shirt_cartoon_deault);
             }else{
                 ((ImageView) view.findViewById(R.id.ivClothImgProgram)).setImageBitmap(prog.getImage());
             }
@@ -133,7 +127,7 @@ public class ProgramAdapter extends BaseAdapter {
         }else{
 
             if(prog.getImage()==null) {
-                ((ImageView) view.findViewById(R.id.ivClothImgMngProgram)).setImageResource(R.drawable.shirt_cartoon_deault); // TODO: replace default image with image path of program
+                ((ImageView) view.findViewById(R.id.ivClothImgMngProgram)).setImageResource(R.drawable.shirt_cartoon_deault);
             }else{
                 ((ImageView) view.findViewById(R.id.ivClothImgMngProgram)).setImageBitmap(prog.getImage());
             }
@@ -148,8 +142,6 @@ public class ProgramAdapter extends BaseAdapter {
             ((ImageView)view.findViewById(R.id.ClothImgMngInfo)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: REMOVE
-//                    Toast.makeText(view.getContext(), prog.getDescription(), Toast.LENGTH_LONG).show();
                     InfoProgram.info_program = prog;
                     Intent intent = new Intent(context, InfoProgram.class);
                     context.startActivity(intent);

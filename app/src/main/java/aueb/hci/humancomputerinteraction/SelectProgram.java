@@ -31,7 +31,7 @@ public class SelectProgram extends AppCompatActivity {
         ToggleButton tbSelectDryer = findViewById(R.id.tbSelectDryer);
         Button btnSelectCancel = findViewById(R.id.btnSelectCancel);
         Button btnSelectStart = findViewById(R.id.btnSelectStart);
-        GridView grid_images_select = (GridView) findViewById(R.id.grid_images_select);
+        GridView grid_images_select = findViewById(R.id.grid_images_select);
 
         ImageView info = findViewById(R.id.ivSelectInfo);
 
@@ -58,7 +58,6 @@ public class SelectProgram extends AppCompatActivity {
                     Toast.makeText(SelectProgram.this, HomeScreen.runningProgram.getName() + " is running. Please wait for it to finish, or stop it first!", Toast.LENGTH_LONG).show();
                 }else if(adapter.selectedProgram!=null){
                     Intent intent = new Intent();
-                    //intent.putExtra("PROGRAM_NAME",adapter.selectedProgram.getName()); // TODO esbhsa tote kai egw apo to select program to intent
                     Program overProg = new Program(adapter.selectedProgram);
                     // Override only if checked
                     if(tbSelectEco.isChecked()){
@@ -88,14 +87,6 @@ public class SelectProgram extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // TODO: REMOVE
-//                Toast.makeText(SelectProgram.this, "In this screen you can select a Program from the saved programs by clicking on it and pressing 'Start' to start a wash.\n" +
-//                        "By pressing in one of the above buttons you can sort the programs based on their type.\n" +
-//                        "By pressing on the shirt's info icon, you get info about that program.\n" +
-//                        "By pressing on the shirt's heart icon, you can favorite and unfavorite the program.\n" +
-//                        "By pressing on the shirt's gear icon, you can do configurations for the program.\n" +
-//                        "By enabling one of the override toggle-buttons, you override that mode for any chosen program.", Toast.LENGTH_LONG).show();
-
                 InfoScreen.textId = 0;
                 Intent intent = new Intent(SelectProgram.this, InfoScreen.class);
                 startActivity(intent);
@@ -107,10 +98,8 @@ public class SelectProgram extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        //intent.putExtra("PROGRAMS",programData);
         setResult(Activity.RESULT_CANCELED,intent);
         finish();
-        //super.onBackPressed();
     }
 
 }

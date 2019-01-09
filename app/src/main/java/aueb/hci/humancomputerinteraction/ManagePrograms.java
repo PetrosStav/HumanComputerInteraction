@@ -40,7 +40,7 @@ public class ManagePrograms extends AppCompatActivity {
         setContentView(R.layout.manage_programs);
         Button goback = findViewById(R.id.btnManageGoBack);
         Button edit = findViewById(R.id.btnManageEdit);
-        GridView grid_images_manage = (GridView) findViewById(R.id.grid_images_manage);
+        GridView grid_images_manage = findViewById(R.id.grid_images_manage);
 
         ImageView info = findViewById(R.id.ivManageInfo);
 

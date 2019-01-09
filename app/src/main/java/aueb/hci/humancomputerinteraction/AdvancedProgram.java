@@ -259,7 +259,6 @@ public class AdvancedProgram extends AppCompatActivity {
                             }else{
                                 ((ImageView)view.findViewById(R.id.ivAdvancedHeart)).setImageResource(R.drawable.heartico);
                             }
-                            //Toast.makeText(view.getContext(), (advProg.isFavorited()?" Favorited!":" Unfavorited!"), Toast.LENGTH_SHORT).show(); //TODO MAYBE NOT SHOW A TOAST?
                         }
                     });
 
