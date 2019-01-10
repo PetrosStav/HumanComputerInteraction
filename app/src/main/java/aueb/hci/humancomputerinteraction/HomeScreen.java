@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -69,6 +70,8 @@ public class HomeScreen extends AppCompatActivity {
 
     TextToSpeech tts = null;
 
+    public static Resources res = null;
+
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -100,6 +103,7 @@ public class HomeScreen extends AppCompatActivity {
             tvProgram.setText("Program: " + runningProgram.getName()+ " - Prewash");
             if(speakerEnabled) {
                 tts.speak(runningProgram.getName() + ", Prewashing...", TextToSpeech.QUEUE_ADD, null);
+                tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
             }
             if(notificationsEnabled){
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "chan_wash")
@@ -134,6 +138,7 @@ public class HomeScreen extends AppCompatActivity {
                     Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Prewash was cancelled!", Toast.LENGTH_LONG).show();
                     if(speakerEnabled){
                         tts.speak(runningProgram.getName() + " was cancelled!", TextToSpeech.QUEUE_ADD, null);
+                        tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                     }
                     if(notificationsEnabled){
                         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -164,7 +169,9 @@ public class HomeScreen extends AppCompatActivity {
                     Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Prewash has finished!", Toast.LENGTH_LONG).show();
                     if(speakerEnabled) {
                         tts.speak(runningProgram.getName() + ", Prewash has finished!", TextToSpeech.QUEUE_ADD, null);
+                        tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                         tts.speak(runningProgram.getName() + ", Washing...", TextToSpeech.QUEUE_ADD, null);
+                        tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                     }
                     if(notificationsEnabled){
                         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -220,6 +227,7 @@ public class HomeScreen extends AppCompatActivity {
                             Toast.makeText(HomeScreen.this, runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
                             if(speakerEnabled) {
                                 tts.speak(runningProgram.getName() + " has finished washing!", TextToSpeech.QUEUE_ADD, null);
+                                tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                             }
                             if(notificationsEnabled){
                                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -240,6 +248,7 @@ public class HomeScreen extends AppCompatActivity {
                                 tvProgram.setText("Program: " + runningProgram.getName()+ " - Dryer");
                                 if(speakerEnabled) {
                                     tts.speak(runningProgram.getName() + ", Drying...", TextToSpeech.QUEUE_ADD, null);
+                                    tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                                 }
                                 if(notificationsEnabled){
                                     NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -273,6 +282,7 @@ public class HomeScreen extends AppCompatActivity {
                                         Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer was cancelled!", Toast.LENGTH_LONG).show();
                                         if(speakerEnabled){
                                             tts.speak(runningProgram.getName() + " was cancelled!", TextToSpeech.QUEUE_ADD, null);
+                                            tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                                         }
                                         if(notificationsEnabled){
                                             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -303,6 +313,7 @@ public class HomeScreen extends AppCompatActivity {
                                         Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer has finished!", Toast.LENGTH_LONG).show();
                                         if(speakerEnabled) {
                                             tts.speak(runningProgram.getName() + ", Dryer has finished!", TextToSpeech.QUEUE_ADD, null);
+                                            tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                                         }
                                         if(notificationsEnabled){
                                             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -320,6 +331,7 @@ public class HomeScreen extends AppCompatActivity {
                                         }
                                         if(speakerEnabled) {
                                             tts.speak(runningProgram.getName() + " has finished!", TextToSpeech.QUEUE_ADD, null);
+                                            tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                                         }
                                         if(notificationsEnabled){
                                             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -390,6 +402,7 @@ public class HomeScreen extends AppCompatActivity {
                             Toast.makeText(HomeScreen.this, runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
                             if(speakerEnabled) {
                                 tts.speak(runningProgram.getName() + "was canceled!", TextToSpeech.QUEUE_ADD, null);
+                                tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                             }
                             if(notificationsEnabled){
                                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -487,6 +500,7 @@ public class HomeScreen extends AppCompatActivity {
 
             if(speakerEnabled) {
                 tts.speak(runningProgram.getName() + ", Washing...", TextToSpeech.QUEUE_ADD, null);
+                tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
             }
             if(notificationsEnabled){
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -527,6 +541,7 @@ public class HomeScreen extends AppCompatActivity {
                     Toast.makeText(HomeScreen.this, runningProgram.getName() + " has finished washing!", Toast.LENGTH_LONG).show();
                     if(speakerEnabled) {
                         tts.speak(runningProgram.getName() + " has finished washing!", TextToSpeech.QUEUE_ADD, null);
+                        tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                     }
                     if(notificationsEnabled){
                         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -547,6 +562,7 @@ public class HomeScreen extends AppCompatActivity {
                         tvProgram.setText("Program: " + runningProgram.getName()+ " - Dryer");
                         if(speakerEnabled) {
                             tts.speak(runningProgram.getName() + ", Drying...", TextToSpeech.QUEUE_ADD, null);
+                            tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                         }
                         if(notificationsEnabled){
                             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -580,6 +596,7 @@ public class HomeScreen extends AppCompatActivity {
                                 Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer was cancelled!", Toast.LENGTH_LONG).show();
                                 if(speakerEnabled){
                                     tts.speak(runningProgram.getName() + " was cancelled!", TextToSpeech.QUEUE_ADD, null);
+                                    tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                                 }
                                 if(notificationsEnabled){
                                     NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -610,7 +627,9 @@ public class HomeScreen extends AppCompatActivity {
                                 Toast.makeText(HomeScreen.this, runningProgram.getName()+" - Dryer has finished!", Toast.LENGTH_LONG).show();
                                 if(speakerEnabled) {
                                     tts.speak(runningProgram.getName() + ", Dryer has finished!", TextToSpeech.QUEUE_ADD, null);
+                                    tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                                     tts.speak(runningProgram.getName() + " has finished!", TextToSpeech.QUEUE_ADD, null);
+                                    tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                                 }
                                 if(notificationsEnabled){
                                     NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -695,6 +714,7 @@ public class HomeScreen extends AppCompatActivity {
                     Toast.makeText(HomeScreen.this, runningProgram.getName() + " was canceled!", Toast.LENGTH_LONG).show();
                     if(speakerEnabled) {
                         tts.speak(runningProgram.getName() + " was cancelled!", TextToSpeech.QUEUE_ADD, null);
+                        tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
                     }
                     if(notificationsEnabled){
                         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "chan_wash")
@@ -780,6 +800,7 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        res = getResources();
         setContentView(R.layout.activity_home_screen);
         Button select_program = findViewById(R.id.btSelectProgram);
         Button advanced_program = findViewById(R.id.btAdvancedProgram);
@@ -933,6 +954,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tts.speak("That tickles!", TextToSpeech.QUEUE_ADD, null);
+                tts.playSilentUtterance(1000,TextToSpeech.QUEUE_ADD, null);
             }
         });
 
