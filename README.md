@@ -1,2 +1,3 @@
 # HumanComputerInteraction
-Android Studio Project for the course Human Computer Interaction.Creating an interface for a washing machine with voice recognition capabilities
+
+Android Studio Project for the course Human Computer Interaction for the Computer Science Department of the Athen's University of Economics and Business. Features a Washing Machine App for a target group of young people.
